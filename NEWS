@@ -1,5 +1,8 @@
 Package: acnr
 =================
 
+Version: 0.1.1 [2012-02-07]
+o Renamed 'inst/extData' to 'inst/extdata'
+
 Version: 0.1.0 [2012-01-31]
 o Created from package 'jointSeg'.
