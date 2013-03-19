@@ -1,5 +1,7 @@
 Package: acnr
 =================
+Version: 0.1.1 [2012-03-15]
+o Added regions in Illumina data
 
 Version: 0.1.1 [2012-02-07]
 o Renamed 'inst/extData' to 'inst/extdata'
