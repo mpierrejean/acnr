@@ -33,7 +33,9 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
   tumorFractions <- switch(platform,
                           Affymetrix=c(.3, .5, .7, 1),
                           Illumina=c(.14,.34,.50,.79,1))
-  stopifnot(tumorFraction %in% tumorFractions)
+  if(!(tumorFraction %in% tumorFractions)) {
+    stop("'tumorFraction' should be in c(", paste(tumorFractions, collapse=", "), ") for platform ", platform)
+  }
   
   sampleName <- switch(platform,
                     Affymetrix="GSE29172,ASCRMAv2,H1395vsBL1395",
@@ -75,6 +77,9 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
 
 ############################################################################
 ## HISTORY:
+## 2013-04-13
+## o More informative error message when desired tumor fraction is not
+## available.
 ## 2013-01-22
 ## o Updated doc.
 ## 2013-01-15
