@@ -47,7 +47,7 @@ for (kk in seq(along=pathnames)) {
     path <- Arguments$getWritablePath(path);
     pathname <- file.path(path, figName)
 
-    if (!file.exists(pathname) || figForce) {
+    if (!file.exists(pathname) || figForce) {
       png(pathname, width=1200, height=800)
       par(mfrow=c(2,1))
       plot(CT~posMb, data=datCC, cex=0.2, ylim=c(0,5), pch=19, xlab="position (Mb)", ylab="copy number")

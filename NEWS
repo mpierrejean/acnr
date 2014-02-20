@@ -1,7 +1,10 @@
 Package: acnr
 =================
+Version: 0.1.5 [2014-02-20]
+o Added a succinct vignette.
+
 Version: 0.1.4 [2013-12-04]
-o Change (1,2) region in Illumina Data
+o Changed (1,2) region in Illumina Data.
 
 Version: 0.1.3 [2013-04-13]
 o Now 'c' is on the non-log scale for both Affy and Illumina.

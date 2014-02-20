@@ -1,7 +1,14 @@
 ## Adapted from http://aroma-project.org/vignettes/PairedPSCBS-lowlevel
 
-##source("02.doASCRMAv2.R")
-##source("trunk/inst/testScripts/system/preprocessing/GSE29172/02.doASCRMAv2.R")
+dataSet <- "GSE29172"
+chipType <- "GenomeWideSNP_6"
+
+if (FALSE) {
+  rpn <- sprintf("testScripts/system/preprocessing/%s/02.doASCRMAv2.R", dataSet)
+  pn <- system.file(rpn, package="acnr")
+  file.exists(pn)
+  source(pn)
+}
 
 fnt <- function(names, ...) {
   pct <- gsub(".*mix([0-9]+).*", "\\1", names)
