@@ -1,5 +1,8 @@
 Package: acnr
 =================
+Version: 0.1.6 [2014-05-14]
+o Bumped up version number to trigger build of 'jointSeg' by R-forge.
+
 Version: 0.1.5 [2014-02-20]
 o Added a succinct vignette.
 
