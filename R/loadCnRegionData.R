@@ -1,9 +1,9 @@
 loadCnRegionData <- structure(function(# Load real, annotated copy number data
 ### Load real, annotated copy number data
-                                       platform=c("Affymetrix", "Illumina"),
+                                       platform=c("GSE29172", "GSE11976"),
 ### microarray platform from which the data was generated.
                                        tumorFraction=1
-### proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{platform=="Affymetrix"}, and in {.14,.34,.50,.79,1} when \code{platform=="Illumina"}.
+### proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{platform=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{platform=="GSE11976"}.
                                        ){
   ##details<<This function is a wrapper to load real genotyping array
   ##data taken from dilution series from the Affymetrix
@@ -31,18 +31,18 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
 
   platform <- match.arg(platform)
   tumorFractions <- switch(platform,
-                          Affymetrix=c(.3, .5, .7, 1),
-                          Illumina=c(.14,.34,.50,.79,1))
+                          GSE29172=c(.3, .5, .7, 1),
+                          GSE11976=c(.14,.34,.50,.79,1))
   if(!(tumorFraction %in% tumorFractions)) {
     stop("'tumorFraction' should be in c(", paste(tumorFractions, collapse=", "), ") for platform ", platform)
   }
   
   sampleName <- switch(platform,
-                    Affymetrix="GSE29172,ASCRMAv2,H1395vsBL1395",
-                    Illumina="CRL2324,BAF")
+                    GSE29172="GSE29172,ASCRMAv2,H1395vsBL1395",
+                    GSE11976="CRL2324,BAF")
   chipType <- switch(platform,
-                     Affymetrix="GenomeWideSNP_6",
-                     Illumina="HumanCNV370v1")
+                     GSE29172="GenomeWideSNP_6",
+                     GSE11976="HumanCNV370v1")
   filename <- sprintf("%s,%s,cnRegions.xdr", sampleName, 100*tumorFraction)
   relPath <- file.path("extdata", chipType, filename)
   pathname <- system.file(relPath, package="acnr")
@@ -68,10 +68,10 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
 ###  missing genotypes are interpreted as non-polymorphic loci (a.k.a. copy
 ###  number probes).}}
 }, ex=function() {
-  affyDat <- loadCnRegionData(platform="Affymetrix", tumorFraction=1)
+  affyDat <- loadCnRegionData(platform="GSE29172", tumorFraction=1)
   str(affyDat)
   
-  illuDat <- loadCnRegionData(platform="Illumina", tumorFraction=.79)
+  illuDat <- loadCnRegionData(platform="GSE11976", tumorFraction=.79)
   str(illuDat)
 })
 
