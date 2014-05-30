@@ -2,10 +2,10 @@
 \alias{loadCnRegionData}
 \title{Load real, annotated copy number data}
 \description{Load real, annotated copy number data}
-\usage{loadCnRegionData(platform = c("GSE29172", "GSE11976"), tumorFraction = 1)}
+\usage{loadCnRegionData(dataSet = c("GSE29172", "GSE11976"), tumorFraction = 1)}
 \arguments{
-  \item{platform}{microarray platform from which the data was generated.}
-  \item{tumorFraction}{proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{platform=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{platform=="GSE11976"}.}
+  \item{dataSet}{microarray dataSet from which the data was generated.}
+  \item{tumorFraction}{proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{dataSet=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.}
 }
 \details{This function is a wrapper to load real genotyping array
 data taken from dilution series from the Affymetrix
@@ -55,9 +55,9 @@ http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE26302}
 
 
 \examples{
-affyDat <- loadCnRegionData(platform="GSE29172", tumorFraction=1)
+affyDat <- loadCnRegionData(dataSet="GSE29172", tumorFraction=1)
 str(affyDat)
 
-illuDat <- loadCnRegionData(platform="GSE11976", tumorFraction=.79)
+illuDat <- loadCnRegionData(dataSet="GSE11976", tumorFraction=.79)
 str(illuDat)
 }

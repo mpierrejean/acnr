@@ -1,9 +1,9 @@
 loadCnRegionData <- structure(function(# Load real, annotated copy number data
 ### Load real, annotated copy number data
-                                       platform=c("GSE29172", "GSE11976"),
-### microarray platform from which the data was generated.
+                                       dataSet=c("GSE29172", "GSE11976"),
+### microarray dataSet from which the data was generated.
                                        tumorFraction=1
-### proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{platform=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{platform=="GSE11976"}.
+### proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{dataSet=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.
                                        ){
   ##details<<This function is a wrapper to load real genotyping array
   ##data taken from dilution series from the Affymetrix
@@ -29,18 +29,18 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
   ##http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29172
   ##http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE26302
 
-  platform <- match.arg(platform)
-  tumorFractions <- switch(platform,
+  dataSet <- match.arg(dataSet)
+  tumorFractions <- switch(dataSet,
                           GSE29172=c(.3, .5, .7, 1),
                           GSE11976=c(.14,.34,.50,.79,1))
   if(!(tumorFraction %in% tumorFractions)) {
-    stop("'tumorFraction' should be in c(", paste(tumorFractions, collapse=", "), ") for platform ", platform)
+    stop("'tumorFraction' should be in c(", paste(tumorFractions, collapse=", "), ") for dataSet ", dataSet)
   }
   
-  sampleName <- switch(platform,
+  sampleName <- switch(dataSet,
                     GSE29172="GSE29172,ASCRMAv2,H1395vsBL1395",
                     GSE11976="CRL2324,BAF")
-  chipType <- switch(platform,
+  chipType <- switch(dataSet,
                      GSE29172="GenomeWideSNP_6",
                      GSE11976="HumanCNV370v1")
   filename <- sprintf("%s,%s,cnRegions.xdr", sampleName, 100*tumorFraction)
@@ -68,10 +68,10 @@ loadCnRegionData <- structure(function(# Load real, annotated copy number data
 ###  missing genotypes are interpreted as non-polymorphic loci (a.k.a. copy
 ###  number probes).}}
 }, ex=function() {
-  affyDat <- loadCnRegionData(platform="GSE29172", tumorFraction=1)
+  affyDat <- loadCnRegionData(dataSet="GSE29172", tumorFraction=1)
   str(affyDat)
   
-  illuDat <- loadCnRegionData(platform="GSE11976", tumorFraction=.79)
+  illuDat <- loadCnRegionData(dataSet="GSE11976", tumorFraction=.79)
   str(illuDat)
 })
 

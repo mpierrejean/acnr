@@ -1,5 +1,8 @@
 Package: acnr
 =================
+Version: 0.2.0 [2014-05-30]
+o Changed platform to dataSet
+
 Version: 0.1.7 [2014-05-27]
 o Changed Illumina to GSE11976 and Affymetrix to GSE29172 
 
