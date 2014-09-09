@@ -1,10 +1,16 @@
 Package: acnr
 =================
+Version: 0.2.2 [2014-09-08]
+o Added a mini-vignette.
+
+Version: 0.2.1 [2014-05-30]
+o Moved inst/testScripts/system/preprocessing to inst/preprocessing.
+
 Version: 0.2.0 [2014-05-30]
-o Changed platform to dataSet
+o Changed ‘platform’ to ‘dataSet’.
 
 Version: 0.1.7 [2014-05-27]
-o Changed Illumina to GSE11976 and Affymetrix to GSE29172 
+o Changed ‘Illumina’ to ‘GSE11976’ and ‘Affymetrix’ to ‘GSE29172’. 
 
 Version: 0.1.6 [2014-05-14]
 o Bumped up version number to trigger build of 'jointSeg' by R-forge.
