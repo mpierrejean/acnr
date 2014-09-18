@@ -28,23 +28,23 @@ library(acnr)
 
 <<echo=TRUE, results=tex>>=
 tf <- .5
-platforms <- c("Affymetrix", "Illumina")
+dataSets <- c("GSE29172", "GSE11976")
 
-regList <- lapply(platforms, FUN=function(pf) {
-  regDat <- loadCnRegionData(platform=pf, tumorFraction=tf) 
-  regs <- regDat[["region"]]
+regList <- lapply(dataSets, FUN=function(ds) {
+    regDat <- loadCnRegionData(dataSet=ds, tumorFraction=tf) 
+    regs <- regDat[["region"]]
 })
-names(regList) <- platforms
+names(regList) <- dataSets
 
 allregs <- unique(unlist(regList))
 tab <- sapply(allregs, FUN=function(reg) {
-  sapply(regList, FUN=function(rr) sum(rr==reg))
+    sapply(regList, FUN=function(rr) sum(rr==reg))
 })
 cap <- paste("Size of annotated copy-number regions for each of the", 
-             length(platforms), "data sets.")
+            length(dataSets), "data sets.")
 if (require(xtable)) {
-  print(xtable(tab, caption=cap, label="tab:regData", 
-               table.placement="!h", caption.placement="bottom"))
+    print(xtable(tab, caption=cap, label="tab:regData",
+                table.placement="!h", caption.placement="bottom"))
 }
 @
 
