@@ -1,17 +1,19 @@
 \name{loadCnRegionData}
 \alias{loadCnRegionData}
-\title{Load real, annotated copy number data}
+\title{loadCnRegionData}
 \description{Load real, annotated copy number data}
-\usage{loadCnRegionData(dataSet = c("GSE29172", "GSE11976"), tumorFraction = 1)}
-\arguments{
-  \item{dataSet}{microarray dataSet from which the data was generated.}
-  \item{tumorFraction}{proportion of tumor cells in the "tumor" sample. Should be in {.3, .5, .7, 1} if \code{dataSet=="GSE29172"}, and in {.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.}
+\usage{loadCnRegionData(dataSet = c("GSE29172", "GSE11976"), tumorFraction = 1)}\arguments{
+\item{dataSet}{microarray dataSet from which the data was generated.}
+\item{tumorFraction}{proportion of tumor cells in the "tumor" sample.
+Should be in {.3, .5, .7, 1} if \code{dataSet=="GSE29172"},
+and in {.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.}
 }
 \details{This function is a wrapper to load real genotyping array
 data taken from dilution series from the Affymetrix
 GenomeWideSNP_6 chip type (Rasmussen et al, 2011) or from the
 Illumina HumanCNV370v1 chip type (Staaf et al, 2008)}
-\value{a data.frame containing copy number data for different types of copy number regions.  Columns:\describe{
+\value{a data.frame containing copy number data for different types of
+copy number regions.  Columns:\describe{
 \item{c}{Total copy number}
 \item{b}{Allele B fraction (a.k.a. BAF)}
 \item{region}{a character value, annotation label for the

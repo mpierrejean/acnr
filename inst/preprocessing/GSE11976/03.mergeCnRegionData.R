@@ -19,29 +19,29 @@ pcts <- unique(gsub(pattern, "\\1", filenames))
 
 savPath <- file.path("extdata", "cnData", chipType)
 savPath <- Arguments$getWritablePath(savPath);
-  
+
 types <- regDat[["type"]]
 pct <- c("100","79", "50", "34") 
 for (pp in pct) {
-  print(pp)
-  pattern <- sprintf("CRL2324,BAF,%s,(.*).xdr", pp)
-  filenames <- list.files(path, pattern=pattern)
-  types <- gsub(pattern, "\\1", filenames)
-  
-  pathnames <- file.path(path, filenames)
-  names(pathnames) <- types
-  datList <- lapply(pathnames, loadObject)
-  dat <- NULL
-  for (dd in names(datList)) {
-    datDD <- datList[[dd]]
-    datDD$region <- dd
-    dat <- rbind(dat, datDD)
-  }
-  str(dat)
+    print(pp)
+    pattern <- sprintf("CRL2324,BAF,%s,(.*).xdr", pp)
+    filenames <- list.files(path, pattern=pattern)
+    types <- gsub(pattern, "\\1", filenames)
+    
+    pathnames <- file.path(path, filenames)
+    names(pathnames) <- types
+    datList <- lapply(pathnames, loadObject)
+    dat <- NULL
+    for (dd in names(datList)) {
+        datDD <- datList[[dd]]
+        datDD$region <- dd
+        dat <- rbind(dat, datDD)
+    }
+    str(dat)
 
-  filename <- sprintf("%s,%s,cnRegions.xdr", dataSet, pp)
-  pathname <- file.path(savPath, filename)
-  saveObject(dat, file=pathname)
+    filename <- sprintf("%s,%s,cnRegions.xdr", dataSet, pp)
+    pathname <- file.path(savPath, filename)
+    saveObject(dat, file=pathname)
 }
 
 

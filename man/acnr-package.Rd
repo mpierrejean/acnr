@@ -8,13 +8,14 @@
 \tabular{ll}{Package: \tab acnr\cr
 Type: \tab Package\cr
 Title: \tab Annotated Copy-Number Regions\cr
-Version: \tab 0.2.0\cr
-Date: \tab 2014-05-30\cr
+Version: \tab 0.2.2\cr
+Date: \tab 2014-09-08\cr
 Author: \tab Morgane Pierre-Jean and Pierre Neuvial\cr
 Maintainer: \tab Morgane Pierre-Jean <morgane.pierrejean@genopole.cnrs.fr>\cr
 License: \tab LGPL (>= 2.1)\cr
 Depends: \tab R (>= 2.10), R.utils\cr
-Reverse suggests: \tab jointseg\cr}
+Suggests: \tab RUnit, BiocGenerics\cr
+biocViews: \tab ExperimentData\cr}
 }
 \author{Morgane Pierre-Jean and Pierre Neuvial}
 

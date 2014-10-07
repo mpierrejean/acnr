@@ -4,14 +4,14 @@ dataSet <- "GSE29172"
 chipType <- "GenomeWideSNP_6"
 
 if (FALSE) {
-  rpn <- sprintf("testScripts/system/preprocessing/%s/02.doASCRMAv2.R", dataSet)
-  pn <- system.file(rpn, package="acnr")
-  file.exists(pn)
-  source(pn)
+    rpn <- sprintf("testScripts/system/preprocessing/%s/02.doASCRMAv2.R", dataSet)
+    pn <- system.file(rpn, package="acnr")
+    file.exists(pn)
+    source(pn)
 }
 
 fnt <- function(names, ...) {
-  pct <- gsub(".*mix([0-9]+).*", "\\1", names)
+    pct <- gsub(".*mix([0-9]+).*", "\\1", names)
 }
 
 ## tumor samples
@@ -50,39 +50,39 @@ path <- Arguments$getWritablePath(path);
 
 idxs <- seq(length=dim(dataT)[3])
 for (ss in idxs) {
-  pct <- dimnames(dataT)[[3]][ss]
-  print(pct)
+    pct <- dimnames(dataT)[[3]][ss]
+    print(pct)
 
-  pairName <- sprintf("%svs%s,%s", tumorName, normalName, pct)
+    pairName <- sprintf("%svs%s,%s", tumorName, normalName, pct)
 
-  ## Total CNs for the tumor relative to the matched normal
-  CT <- 2 * dataT[,"total", ss] / thetaN;
-             
-  ## Allele B fractions for the tumor
-  betaT <- dataT[,"fracB", ss];
-  
-  ## Setup data structure
-  df <- data.frame(chromosome=chromosome, x=x, CT=CT, betaT=betaT, betaN=betaN);
+    ## Total CNs for the tumor relative to the matched normal
+    CT <- 2 * dataT[,"total", ss] / thetaN;
+    
+    ## Allele B fractions for the tumor
+    betaT <- dataT[,"fracB", ss];
+    
+    ## Setup data structure
+    df <- data.frame(chromosome=chromosome, x=x, CT=CT, betaT=betaT, betaN=betaN);
 
-  dfC <- subset(df, !is.na(df$chromosome) & !is.na(df$x))
-  str(dfC)
-  
-  ## save  
-  fileName <- sprintf("%s.xdr", pairName)
-  pathname <- file.path(path, fileName)
-  saveObject(dfC, file=pathname)
-  
-  ## chromosome by chromosome
-  for (cc in 1:24) {
-    print(cc)
-    fileName <- sprintf("%s,chr=%02d.xdr", pairName, cc)
+    dfC <- subset(df, !is.na(df$chromosome) & !is.na(df$x))
+    str(dfC)
+    
+    ## save  
+    fileName <- sprintf("%s.xdr", pairName)
     pathname <- file.path(path, fileName)
     saveObject(dfC, file=pathname)
     
-    datCC <- subset(dfC, chromosome==cc)
-    o <- order(datCC$x)
-    datCC <- datCC[o, ]
-    str(datCC)
-    save(datCC, file=pathname)
-  }
+    ## chromosome by chromosome
+    for (cc in 1:24) {
+        print(cc)
+        fileName <- sprintf("%s,chr=%02d.xdr", pairName, cc)
+        pathname <- file.path(path, fileName)
+        saveObject(dfC, file=pathname)
+        
+        datCC <- subset(dfC, chromosome==cc)
+        o <- order(datCC$x)
+        datCC <- datCC[o, ]
+        str(datCC)
+        save(datCC, file=pathname)
+    }
 }
