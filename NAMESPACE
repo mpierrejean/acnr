@@ -1,1 +1,3 @@
 exportPattern("^[^.]")
+importFrom(R.utils, loadObject)
+importFrom(xtable, xtable)
