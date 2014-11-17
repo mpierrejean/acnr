@@ -8,4 +8,3 @@ Maintainer: Morgane Pierre-Jean <morgane.pierrejean@genopole.cnrs.fr>
 Description: This data package contains SNP array data from different types of copy-number regions.  These regions were identified manually by the authors of the package and may be used to generate realistic data sets with known truth.
 License: LGPL (>= 2.1)
 Depends: R (>= 2.10), R.utils, xtable
-Suggests: RUnit, BiocGenerics
