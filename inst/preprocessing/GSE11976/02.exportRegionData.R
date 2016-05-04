@@ -1,20 +1,20 @@
 library(R.utils)
-source("00.defineCopyNumberSegments.R")
+source("01.defineCopyNumberSegments.R")
 str(regDat)
 
-datI <- loadObject("CRL2324_dilutionSeries.xdr")
+datI <- readRDS("CRL2324_dilutionSeries.rds")
 datI$posMb <- datI$Position/1e6;
 ## Define genotypes
 
 
-pct <- c("100","79", "50", "34") 
+pct <- c("100","79", "50", "34", "0") 
 dataSet <- "CRL2324,BAF"
 chipType <- "HumanCNV370v1"
 savPath <- "cnRegionData"
 savPath <- Arguments$getWritablePath(savPath)
 path <- file.path(savPath, dataSet, chipType);
 path <- Arguments$getWritablePath(path)
-for( in pct){
+for(pp in pct){
     sampleName <- sprintf("CRL2324,BAF,%s",pp)
     for (rr in 1:nrow(regDat)) {
         chr <- regDat[rr, "chr"]
@@ -33,8 +33,8 @@ for( in pct){
         tgb <- tan(datSS$b*pi/2)
         datSS$b <- tgb/(1+tgb)
         datSS <- round(datSS, 3)
-        filename <- sprintf("%s,%s.xdr", sampleName, type)
+        filename <- sprintf("%s,%s.rds", sampleName, type)
         pathname <- file.path(path,filename)
-        saveObject(datSS, file=pathname)
+        saveRDS(datSS, file=pathname)
     }
 }

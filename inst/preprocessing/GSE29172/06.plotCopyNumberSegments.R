@@ -19,18 +19,18 @@ datPath <- Arguments$getReadablePath(datPath);
 path <- file.path(datPath, sprintf("%s,ASCRMAv2", dataSet), chipType);
 path <- Arguments$getReadablePath(path);
 
-patt <- "H1395vsBL1395,([0-9]+).xdr"
+patt <- "H1395vsBL1395,([0-9]+).rds"
 filenames <- list.files(path, pattern=patt)
 pathnames <- file.path(path, filenames)
 pct <- as.numeric(gsub(patt, "\\1", filenames))
 
 for (kk in seq(along=pct)) {
   pathname <- pathnames[kk]
-  sampleName <- gsub("(.*)\\.xdr$", "\\1", filenames[kk])
+  sampleName <- gsub("(.*)\\.rds$", "\\1", filenames[kk])
 
   print(sampleName)
 
-  dat <- loadObject(pathname)
+  dat <- readRDS(pathname)
   dat$posMb <- dat$x/1e6;
   rm(pathname)
 
@@ -125,7 +125,7 @@ for (kk in seq(along=pct)) {
     names(datSS) <- c("c","b","genotype")
     datSS <- round(datSS, 3)
     
-    filename <- sprintf("%s,%s.xdr", sampleName, type)
+    filename <- sprintf("%s,%s.rds", sampleName, type)
     pathname <- file.path(path, filename)
     saveObject(datSS, file=pathname)
     

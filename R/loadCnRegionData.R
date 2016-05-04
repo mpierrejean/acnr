@@ -1,12 +1,13 @@
 
 loadCnRegionData <- structure(function(
 ### Load real, annotated copy number data
-    dataSet=c("GSE29172", "GSE11976"),
+    dataSet=c("GSE29172", "GSE11976", "GSE13372"),
 ### microarray dataSet from which the data was generated.
     tumorFraction=1
 ### proportion of tumor cells in the "tumor" sample.
 ### Should be in {.3, .5, .7, 1} if \code{dataSet=="GSE29172"},
-### and in {.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.
+### in {0,.14,.34,.50,.79,1} when \code{dataSet=="GSE11976"}.
+### and in {0,1} when \code{dataSet=="GSE13372"}.
     ){
     ##details<<This function is a wrapper to load real genotyping array
     ##data taken from dilution series from the Affymetrix
@@ -27,30 +28,38 @@ loadCnRegionData <- structure(function(
     ##A. (2011). Allele-specific copy number analysis of tumor samples
     ##with aneuploidy and tumor heterogeneity. Genome Biology, 12(10),
     ##R108.
+
+    ##references<<Chiang DY, Getz G, Jaffe DB, O'Kelly MJ et al.
+    ##High-resolution mapping of copy-number alterations with massively
+    ##parallel sequencing. Nat Methods 2009 Jan;6(1):99-103
     
     ##references<<GEO data sets:
     ##http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29172
     ##http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE26302
+    ##http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13372
 
     dataSet <- match.arg(dataSet)
     tumorFractions <- switch(dataSet,
+                             GSE11976=c(0,1),
                              GSE29172=c(.3, .5, .7, 1),
-                             GSE11976=c(.14,.34,.50,.79,1))
+                             GSE11976=c(0,.14,.34,.50,.79,1))
     if(!(tumorFraction %in% tumorFractions)) {
         stop("'tumorFraction' should be in c(",
              paste(tumorFractions, collapse=", "), ") for dataSet ", dataSet)
     }
     
     sampleName <- switch(dataSet,
+                         GSE13372="GSE13372,ASCRMAv2,HCC1143_GLEYSvsHCC1143BL_GLEYS",
                          GSE29172="GSE29172,ASCRMAv2,H1395vsBL1395",
                          GSE11976="CRL2324,BAF")
     chipType <- switch(dataSet,
+                       GSE13372="GenomeWideSNP_6",
                        GSE29172="GenomeWideSNP_6",
                        GSE11976="HumanCNV370v1")
-    filename <- sprintf("%s,%s,cnRegions.xdr", sampleName, 100*tumorFraction)
-    relPath <- file.path("extdata", chipType, filename)
+    filename <- sprintf("%s,%s,cnRegions.rds", sampleName, 100*tumorFraction)
+    relPath <- file.path("extdata", dataSet, chipType, filename)
     pathname <- system.file(relPath, package="acnr")
-    R.utils::loadObject(pathname)
+    readRDS(pathname)
 ### a data.frame containing copy number data for different types of
 ### copy number regions.  Columns:\describe{
 ### \item{c}{Total copy number}

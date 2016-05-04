@@ -1,5 +1,11 @@
 Package: acnr
 =================
+Version: 0.2.5 [2016-05-04]
+o Add a new dataSet GSE13372 
+o Change directory structure in inst/exdata: now inst/exdata/dataSet/chipType
+o Save all files in '.rds'
+o Add a 0% dillution in 'GSE11976' dataset 
+
 Version: 0.2.4 [2014-11-17]
 o Used tools::resaveRdaFiles to compress data
 

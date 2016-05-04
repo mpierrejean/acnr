@@ -10,18 +10,19 @@ if (FALSE) {
 regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
 
-dataSet <- "GSE29172,ASCRMAv2"
+dataSet <- "GSE13372,ASCRMAv2"
 chipType <- "GenomeWideSNP_6"
+
 
 path <- file.path(regPath, dataSet, chipType);
 path <- Arguments$getReadablePath(path);
 
-sampleName <- "H1395vsBL1395"
-pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).xdr", sampleName)
+sampleName <- "HCC1143_GLEYSvsHCC1143BL_GLEYS"
+pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
 pcts <- unique(gsub(pattern, "\\1", filenames))
 
-savPath <- file.path("extdata", "GSE29172", chipType)
+savPath <- file.path("extdata", "GSE13372", chipType)
 savPath <- Arguments$getWritablePath(savPath);
   
 types <- regDat[["type"]]

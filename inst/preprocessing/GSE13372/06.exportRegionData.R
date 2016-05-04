@@ -1,31 +1,35 @@
 library(R.utils);
-library(aroma.light);
 
 if (FALSE) {
   ## Define CN regions:
   ## source("05.defineCopyNumberSegments.R")
-  source("trunk/inst/testScripts/system/preprocessing/GSE29172/05.defineCopyNumberSegments.R")
+  source("trunk/inst/testScripts/system/preprocessing/GSE13372/05.defineCopyNumberSegments.R")
   str(regDat)
 }
 
 datPath <- "wholeGenomeData";
 datPath <- Arguments$getReadablePath(datPath);
 
-dataSet <- "GSE29172,ASCRMAv2"
+dataSet <- "GSE13372,ASCRMAv2"
 chipType <- "GenomeWideSNP_6"
+
 path <- file.path(datPath, dataSet, chipType);
 path <- Arguments$getReadablePath(path);
 
-filenames <- list.files(path, pattern="H1395vsBL1395,([0-9]+).rds")
+filenames <- list.files(path, pattern="HCC1143_GLEYSvsHCC1143BL_GLEYS,([0-9]+).rds")
+sampleNames <- gsub("(.*)\\.rds$", "\\1", filenames)
+
+pathnames <- file.path(path, filenames)
+
 for (kk in seq(along=filenames)) {
   filename <- filenames[kk]
-  sampleName <- gsub("(.*)\\.xdr$", "\\1", filename)
+  sampleName <- gsub("(.*)\\.rds$", "\\1", filename)
   pathname <- file.path(path, filename)
   
   print(sampleName)
   pathname <- pathnames[kk];
   
-  dat <- loadObject(pathname)
+  dat <- readRDS(pathname)
   dat$posMb <- dat$x/1e6;
   rm(pathname)
   
@@ -64,6 +68,6 @@ for (kk in seq(along=filenames)) {
     
     filename <- sprintf("%s,%s.rds", sampleName, type)
     pathname <- file.path(path,filename)
-    readRDS(datSS, file=pathname)
+    saveRDS(datSS, file=pathname)
   }
 }

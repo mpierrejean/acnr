@@ -11,5 +11,5 @@ for(tf in 1:4){
                       dat[idx,]
                   })
                   )
-    saveObject(tt, sprintf("GenomeWideSNP_6/GSE29172,ASCRMAv2,H1395vsBL1395,%s,cnRegions.xdr",pctAffy[tf]))	
+    readRDS(tt, sprintf("GenomeWideSNP_6/GSE29172,ASCRMAv2,H1395vsBL1395,%s,cnRegions.rds",pctAffy[tf]))	
 }
