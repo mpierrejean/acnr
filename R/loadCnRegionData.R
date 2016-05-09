@@ -40,7 +40,7 @@ loadCnRegionData <- structure(function(
 
     dataSet <- match.arg(dataSet)
     tumorFractions <- switch(dataSet,
-                             GSE11976=c(0,1),
+                             GSE13372=c(0,1),
                              GSE29172=c(.3, .5, .7, 1),
                              GSE11976=c(0,.14,.34,.50,.79,1))
     if(!(tumorFraction %in% tumorFractions)) {
