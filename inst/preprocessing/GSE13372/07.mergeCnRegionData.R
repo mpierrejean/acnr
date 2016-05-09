@@ -28,7 +28,7 @@ savPath <- Arguments$getWritablePath(savPath);
 types <- regDat[["type"]]
 for (pct in pcts) {
   print(pct)
-  pattern <- sprintf("H1395vsBL1395,%s,(.*).rds", pct)
+  pattern <- sprintf("%s,%s,(.*).rds",sampleName, pct)
   filenames <- list.files(path, pattern=pattern)
   types <- gsub(pattern, "\\1", filenames)
   
