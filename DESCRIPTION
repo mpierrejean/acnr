@@ -1,10 +1,20 @@
 Package: acnr
 Type: Package
 Title: Annotated Copy-Number Regions
-Version: 0.2.5
-Date: 2016-05-04
+Version: 0.2.6
+Date: 2016-11-23
 Author: Morgane Pierre-Jean and Pierre Neuvial
 Maintainer: Morgane Pierre-Jean <morgane.pierrejean@genopole.cnrs.fr>
-Description: This data package contains SNP array data from different types of copy-number regions.  These regions were identified manually by the authors of the package and may be used to generate realistic data sets with known truth.
+Description: This data package contains SNP array data from different types of
+    copy-number regions. These regions were identified manually by the authors of
+    the package and may be used to generate realistic data sets with known truth.
 License: LGPL (>= 2.1)
-Depends: R (>= 2.10), R.utils, xtable
+Depends:
+    R (>= 2.10),
+Suggests:
+    R.utils,
+    xtable,
+    knitr,
+    rmarkdown
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
