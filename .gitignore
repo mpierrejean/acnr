@@ -5,11 +5,14 @@
 .RData
 .Ruserdata
 inst/doc
-*.R~
 
 ## symbolic links to data directories
+annotationData
 totalAndFracBData
 wholeGenomeData
+png
+cnRegionData
 
 ## OS X
 .DS_Store
+*~

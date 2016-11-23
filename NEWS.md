@@ -1,5 +1,10 @@
 # Package: acnr
 
+## Version: 0.2.7 [2016-11-24]
+
+* Updated scripts for the preprocessing of data set GSE29172
+* Now exporting 'betaT' and 'betaN' for data set GSE29172
+
 ## Version: 0.2.6 [2016-11-23]
 
 * Moved to roxygen2 documentation using package 'Rd2roxygen'

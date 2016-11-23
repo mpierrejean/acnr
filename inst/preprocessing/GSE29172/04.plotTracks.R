@@ -1,5 +1,6 @@
-library(R.utils);
-library(aroma.light);
+library("R.utils");
+library("aroma.light");
+library("PSCBS")
 
 datPath <- "wholeGenomeData";
 datPath <- Arguments$getReadablePath(datPath);
@@ -9,8 +10,8 @@ chipType <- "GenomeWideSNP_6"
 path <- file.path(datPath, dataSet, chipType);
 path <- Arguments$getReadablePath(path);
 
-filenames <- list.files(path, pattern="H1395vsBL1395,([0-9]+).xdr")
-sampleNames <- gsub("(.*)\\.xdr$", "\\1", filenames)
+filenames <- list.files(path, pattern="H1395vsBL1395,([0-9]+).rds")
+sampleNames <- gsub("(.*)\\.rds$", "\\1", filenames)
 
 pathnames <- file.path(path, filenames)
 
@@ -60,9 +61,7 @@ for (kk in seq(along=pathnames)) {
     path <- Arguments$getWritablePath(path);
     pathname <- file.path(path, figName)
 
-    stop()
-    if (!file.exists(pathname) || figForce) {  
-        library(PSCBS)
+    if (!file.exists(pathname)) {  
         fit <- segmentByPairedPSCBS(dat)
         png(pathname, width=800, height=800)
         plotC1C2(fit)

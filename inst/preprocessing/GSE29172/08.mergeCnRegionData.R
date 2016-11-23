@@ -1,23 +1,28 @@
-library(R.utils);
+library("R.utils");
+
+dataSet <- "GSE29172"
+chipType <- "GenomeWideSNP_6"
 
 if (FALSE) {
-  ## Define CN regions:
-  ## source("05.defineCopyNumberSegments.R")
-  source("trunk/inst/testScripts/system/preprocessing/GSE29172/05.defineCopyNumberSegments.R")
-  str(regDat)
+    ## Define CN regions:
+    rpn <- sprintf("preprocessing/%s/05.defineCopyNumberSegments.R", dataSet)
+    pn <- system.file(rpn, package="acnr")
+    file.exists(pn)
+    source(pn)
+    str(regDat)
 }
 
 regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
 
-dataSet <- "GSE29172,ASCRMAv2"
+ds <- sprintf("%s,ASCRMAv2", dataSet)
 chipType <- "GenomeWideSNP_6"
 
-path <- file.path(regPath, dataSet, chipType);
+path <- file.path(regPath, ds, chipType);
 path <- Arguments$getReadablePath(path);
 
 sampleName <- "H1395vsBL1395"
-pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).xdr", sampleName)
+pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
 pcts <- unique(gsub(pattern, "\\1", filenames))
 
@@ -42,7 +47,7 @@ for (pct in pcts) {
   }
   str(dat)
   rownames(dat) <- NULL
-  filename <- sprintf("%s,%s,%s,cnRegions.rds", dataSet, sampleName, pct)
+  filename <- sprintf("%s,%s,%s,cnRegions.rds", ds, sampleName, pct)
   pathname <- file.path(savPath, filename)
   saveRDS(dat, file=pathname)
 }
