@@ -1,0 +1,15 @@
+.Rbuildignore
+*.Rproj
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+inst/doc
+*.R~
+
+## symbolic links to data directories
+totalAndFracBData
+wholeGenomeData
+
+## OS X
+.DS_Store
