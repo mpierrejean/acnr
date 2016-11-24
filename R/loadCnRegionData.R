@@ -60,8 +60,8 @@ loadCnRegionData <- function(
     }
 
     sampleName <- switch(dataSet,
-                         GSE13372="GSE13372,ASCRMAv2,HCC1143_GLEYSvsHCC1143BL_GLEYS",
                          GSE29172="H1395vsBL1395",
+                         GSE13372="HCC1143,GLEYSvsBL_GLEYS",
                          GSE11976="CRL2324,BAF")
     chipType <- switch(dataSet,
                        GSE13372="GenomeWideSNP_6",

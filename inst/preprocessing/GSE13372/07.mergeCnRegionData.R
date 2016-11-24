@@ -43,7 +43,8 @@ for (pct in pcts) {
   }
   str(dat)
   rownames(dat) <- NULL
-  filename <- sprintf("%s,%s,%s,cnRegions.rds", dataSet, sampleName, pct)
+  shortSN <-"HCC1143,GLEYSvsBL_GLEYS"
+  filename <- sprintf("%s,%s,cnRegions.rds", shortSN, pct)
   pathname <- file.path(savPath, filename)
   saveRDS(dat, file=pathname)
 }
