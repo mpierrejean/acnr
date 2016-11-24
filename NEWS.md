@@ -4,6 +4,7 @@
 
 * Updated scripts for the preprocessing of data set GSE29172
 * Now exporting 'betaT' and 'betaN' for data set GSE29172
+* Renamed files from Affymetrix data sets
 
 ## Version: 0.2.6 [2016-11-23]
 
@@ -13,10 +14,10 @@
 
 ## Version: 0.2.5 [2016-05-04]
 
-* Add a new dataSet GSE13372 
+* Add a new dataSet GSE13372
 * Change directory structure in inst/exdata: now inst/exdata/dataSet/chipType
 * Save all files in '.rds'
-* Add a 0% dillution in 'GSE11976' dataset 
+* Add a 0% dillution in 'GSE11976' dataset
 
 ## Version: 0.2.4 [2014-11-17]
 
@@ -40,7 +41,7 @@
 
 ## Version: 0.1.7 [2014-05-27]
 
-* Changed ‘Illumina’ to ‘GSE11976’ and ‘Affymetrix’ to ‘GSE29172’. 
+* Changed ‘Illumina’ to ‘GSE11976’ and ‘Affymetrix’ to ‘GSE29172’.
 
 ## Version: 0.1.6 [2014-05-14]
 
