@@ -1,11 +1,11 @@
 #' loadCnRegionData
-#' 
+#'
 #' Load real, annotated copy number data
-#' 
+#'
 #' This function is a wrapper to load real genotyping array data taken from
 #' dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen et
 #' al, 2011) or from the Illumina HumanCNV370v1 chip type (Staaf et al, 2008)
-#' 
+#'
 #' @param dataSet microarray dataSet from which the data was generated.
 #' @param tumorFraction proportion of tumor cells in the "tumor" sample. Should
 #' be in .3, .5, .7, 1 if \code{dataSet=="GSE29172"}, and in .14,.34,.50,.79,1
@@ -27,24 +27,24 @@
 #' Goransson, H., Juliusson, G., ... & Ringn\'er, M. (2008). Segmentation-based
 #' detection of allelic imbalance and loss-of-heterozygosity in cancer cells
 #' using whole genome SNP arrays. Genome Biol, 9(9), R136.
-#' 
+#'
 #' GEO data set: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE11976
-#' 
+#'
 #' Rasmussen, M., Sundstr\"om, M., Kultima, H. G., Botling, J., Micke, P.,
 #' Birgisson, H., Glimelius, B. & Isaksson, A. (2011). Allele-specific copy
 #' number analysis of tumor samples with aneuploidy and tumor heterogeneity.
 #' Genome Biology, 12(10), R108.
-#' 
+#'
 #' GEO data sets: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29172
 #' http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE26302
 #' @examples
-#' 
+#'
 #' affyDat <- loadCnRegionData(dataSet="GSE29172", tumorFraction=1)
 #' str(affyDat)
-#' 
+#'
 #' illuDat <- loadCnRegionData(dataSet="GSE11976", tumorFraction=.79)
 #' str(illuDat)
-#' 
+#'
 #' @export loadCnRegionData
 loadCnRegionData <- function(
     dataSet=c("GSE29172", "GSE11976", "GSE13372"),
@@ -58,10 +58,10 @@ loadCnRegionData <- function(
         stop("'tumorFraction' should be in c(",
              paste(tumorFractions, collapse=", "), ") for dataSet ", dataSet)
     }
-    
+
     sampleName <- switch(dataSet,
                          GSE13372="GSE13372,ASCRMAv2,HCC1143_GLEYSvsHCC1143BL_GLEYS",
-                         GSE29172="GSE29172,ASCRMAv2,H1395vsBL1395",
+                         GSE29172="H1395vsBL1395",
                          GSE11976="CRL2324,BAF")
     chipType <- switch(dataSet,
                        GSE13372="GenomeWideSNP_6",

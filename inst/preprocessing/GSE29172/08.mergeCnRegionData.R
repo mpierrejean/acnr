@@ -28,14 +28,14 @@ pcts <- unique(gsub(pattern, "\\1", filenames))
 
 savPath <- file.path("extdata", "GSE29172", chipType)
 savPath <- Arguments$getWritablePath(savPath);
-  
+
 types <- regDat[["type"]]
 for (pct in pcts) {
   print(pct)
   pattern <- sprintf("H1395vsBL1395,%s,(.*).rds", pct)
   filenames <- list.files(path, pattern=pattern)
   types <- gsub(pattern, "\\1", filenames)
-  
+
   pathnames <- file.path(path, filenames)
   names(pathnames) <- types
   datList <- lapply(pathnames, readRDS)
@@ -47,7 +47,7 @@ for (pct in pcts) {
   }
   str(dat)
   rownames(dat) <- NULL
-  filename <- sprintf("%s,%s,%s,cnRegions.rds", ds, sampleName, pct)
+  filename <- sprintf("%s,%s,cnRegions.rds", sampleName, pct)
   pathname <- file.path(savPath, filename)
   saveRDS(dat, file=pathname)
 }

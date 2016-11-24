@@ -20,11 +20,6 @@ regPath <- "png/regions"
 regPath <- file.path(regPath, dataSet)
 regPath <- Arguments$getWritablePath(regPath)
 
-savPath <- "cnRegionData"
-savPath <- Arguments$getWritablePath(savPath)
-opath <- file.path(savPath, dataSet, chipType);
-opath <- Arguments$getWritablePath(opath)
-
 path <- file.path(datPath, sprintf("%s,ASCRMAv2", dataSet), chipType);
 path <- Arguments$getReadablePath(path);
 
@@ -37,45 +32,45 @@ pct <- as.numeric(gsub(patt, "\\1", filenames))
 for (kk in seq(along=pct)) {
     pathname <- pathnames[kk]
     sampleName <- gsub("(.*)\\.rds$", "\\1", filenames[kk])
-    
+
     print(sampleName)
-    
+
     dat <- readRDS(pathname)
     dat$posMb <- dat$x/1e6;
     rm(pathname)
-    
+
     ## run TumorBoost
     betaTN <- normalizeTumorBoost(betaT=dat$betaT,betaN=dat$betaN)
     muN <- callNaiveGenotypes(dat$betaN)
     dat.norm <- cbind(dat, muN, betaTN, b=2*abs(betaTN-1/2))
-    
+
     ## some plots
     bkp <- function(pos) abline(v=pos, col=5, lwd=2)
-    
+
     resList <- NULL
     for (rr in 1:nrow(regDat)) {
         chr <- regDat[rr, "chr"]
         reg <- c(regDat[rr, "begin"], regDat[rr, "end"])
         type <- regDat[rr, "type"]
         print(type)
-        
+
         datCC <- subset(dat.norm, chromosome==chr)
         minR <- reg[1]
         maxR <- reg[2]
-        
+
         datRR <- subset(datCC, posMb>minR & posMb<maxR)
         str(datRR)
-        
+
         margin <- Inf
         datRRm <- subset(datCC, posMb>minR-margin & posMb<maxR+margin)
         str(datRRm)
-        
+
         figName <- sprintf("%s,chr%02d,%s-%s,%s", sampleName, chr, minR, maxR, type)
-        
+
         tracks <- c("CT", "betaN", "betaT")
         ylabs <- c("Copy number", "Allele B fraction (normal)", "Allele B fraction (tumor)")
         ylims <- rbind(c(0, 5), c(0, 1), c(0, 1))
-        
+
         for (tt in seq(along=tracks)) {
             track <- tracks[[tt]]
             filename <- sprintf("%s,%s.png", figName, track)
@@ -84,12 +79,12 @@ for (kk in seq(along=pct)) {
             par(mar=c(4.8, 4.8, 0, 0)+0.2, cex.lab=2, cex.axis=2)
             plot(datRRm[["posMb"]], datRRm[[track]], pch=NA, ylim=ylims[tt, ],
                  xlab="position (Mb)", ylab=ylabs[tt])
-            pusr <- par("usr") 
+            pusr <- par("usr")
             rect(minR, pusr[3], maxR, pusr[4], col=6)
             points(datRRm[["posMb"]], datRRm[[track]], ylim=ylims[tt, ],
                    pch=19, col="#333333", cex=0.5)
             dev.off()
-            
+
             cols <- rep("#333333", nrow(datRRm))
             cols[datRRm[["posMb"]]<minR] <- NA
             cols[datRRm[["posMb"]]>maxR] <- NA
@@ -99,17 +94,17 @@ for (kk in seq(along=pct)) {
             par(mar=c(4.8, 4.8, 0, 0)+0.2, cex.lab=2, cex.axis=2)
             plot(datRRm[["posMb"]], datRRm[[track]], pch=NA, ylim=ylims[tt, ],
                  xlab="position (Mb)", ylab=ylabs[tt])
-            pusr <- par("usr") 
+            pusr <- par("usr")
             rect(minR, pusr[3], maxR, pusr[4], col=6)
             points(datRRm[["posMb"]], datRRm[[track]], ylim=ylims[tt, ],
                    pch=19, col=cols, cex=0.5)
             dev.off()
         }
-        
+
         opos <- order(datRR$x)
         datRRo <- datRR[opos, ]
-        
-        if (FALSE) { ## currently not used 
+
+        if (FALSE) { ## currently not used
             figName <- sprintf("%s,chr%02d,%s-%s,%s,order.png", sampleName, chr, minR, maxR, type)
             pathname <- file.path(regPath, figName)
             png(pathname, width=1200, height=900)
@@ -122,19 +117,19 @@ for (kk in seq(along=pct)) {
         datSS <- datRRo[, c("CT", "betaTN", "muN", "betaT", "betaN")]
         names(datSS) <- c("c","b","genotype", "bT", "bN")
         datSS <- round(datSS, 3)
-        
+
         resList[[type]] <- datSS
     }
-    
+
     if (FALSE) {
         ## Some statistics
         geno <- sapply(resList, FUN=function(dat) table(dat$genotype, useNA="always"))
         geno
         geno/matrix(colSums(geno), nrow(geno), ncol(geno), byrow=TRUE)
-        
+
         cMeans <- sapply(resList, FUN=function(dat) by(dat, dat$genotype, FUN=function(x) mean(x$c, na.rm=TRUE)))
         bMeans <- sapply(resList, FUN=function(dat) by(dat, dat$genotype, FUN=function(x) mean(2*abs(x$b-1/2), na.rm=TRUE)))
-        
+
         plot(NA, xlim=c(1, ncol(cMeans)), ylim=range(cMeans))
         for (rr in 1:nrow(cMeans)) points(cMeans[rr, ], pch=19, cex=0.3, col=rr)
         plot(NA, xlim=c(1, ncol(bMeans)), ylim=range(bMeans))
