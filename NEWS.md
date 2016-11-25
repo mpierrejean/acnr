@@ -1,5 +1,9 @@
 # Package: acnr
 
+## Version: 0.2.8 [2016-11-25]
+
+* Added functions 'listDataSets' and 'listTumorFractions'
+
 ## Version: 0.2.7 [2016-11-24]
 
 * Updated scripts for the preprocessing of data set GSE29172
