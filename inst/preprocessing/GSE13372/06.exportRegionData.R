@@ -62,8 +62,8 @@ for (kk in seq(along=filenames)) {
     opos <- order(datRR$x)
     datRRo <- datRR[opos, ]
     
-    datSS <- datRRo[, c("CT", "betaTN", "muN")]
-    names(datSS) <- c("c","b","genotype")
+    datSS <- datRRo[, c("CT", "betaTN", "muN", "betaT", "betaN")]
+    names(datSS) <- c("c","b","genotype", "bT","bN")
     datSS <- round(datSS, 3)
     
     filename <- sprintf("%s,%s.rds", sampleName, type)
