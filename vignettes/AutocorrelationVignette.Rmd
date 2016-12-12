@@ -1,0 +1,63 @@
+---
+title: "Autocorrelation plots"
+author: "Morgane Pierre-Jean"
+date: "12/12/2016"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This is a document that shows the autocorrelation plots for the various data sets from ```acnr``` package. This document aims to check if the new DNA copy number profiles build by resampling keep the same structure than the original data, namely, if the original does not hide a spatial/temporal structure. 
+
+```{r, message=FALSE}
+library(acnr)
+library(R.utils)
+```
+
+```{r}
+dataList <- sapply(listDataSets(), loadCnRegionData,USE.NAMES = TRUE)
+```
+## Autocorrelation plots
+```{r, fig.width=7, message =FALSE}
+plot <- lapply(seq(along=dataList), function (ii){
+  nn <- names(dataList)[ii]
+  dd <- dataList[[ii]]
+  dd$region <- as.factor(dd$region)
+  sapply(levels(dd$region), function (rr){
+    subDat <- subset(dd, region==rr)
+    cTrue <- subDat$c
+    cResamp <- sample(cTrue)
+    acf(cTrue, main=sprintf("%s; original data, %s", nn,rr))
+    acf(cResamp, main=sprintf("%s; resampling data, %s", nn,rr))
+})
+})
+```
+When we look at the autocorrelation plots, it seems that the different data sets are not autocorrelated. However, to check this hypothsesis we perform the Ljung-Box test that is defined by :
+H0: The data are independently distributed (i.e. the correlations in the population from which the sample is taken are 0, so that any observed correlations in the data result from randomness of the sampling process).
+H1: The data are not independently distributed; they exhibit serial correlation
+
+## Autocorrelation tests
+```{r}
+lapply(dataList, function (dd){
+  dd$region <- as.factor(dd$region)
+  sapply(levels(dd$region), function (rr){
+    subDat <- subset(dd, region==rr)
+    cTrue <- subDat$c
+    cResamp <- sample(cTrue)
+    Box.test(cTrue, lag=20, type="Ljung-Box")
+})
+})
+```
+The most of the tests for the three data sets reject the null Hypothesis. This means that there exists a temporal correlation in the original data and perfom resampling breaks this correlation.
+
+## Conclusion
+Even if original data are autocorrelated, resample real data to build new profiles enables to get a better modelization of the noise than gaussian simulation. A solution to avoid breaking the structure could be to resample by block. In this way, the most part of the regions will keep the initial autocorrelation.
+
