@@ -4,7 +4,7 @@ dataSet <- "GSE13372";
 chipType <- "GenomeWideSNP_6"
 
 if (FALSE) {
-    rpn <- sprintf("testScripts/system/preprocessing/%s/02.doASCRMAv2.R", dataSet)
+    rpn <- sprintf("testScripts/system/preprocessing/%s/03.doASCRMAv2.R", dataSet)
     pn <- system.file(rpn, package="acnr")
     file.exists(pn)
     source(pn)
