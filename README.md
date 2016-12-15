@@ -1,11 +1,14 @@
 # acnr: annotated copy-number regions
 
-This data package contains SNP array data from different types of copy-number regions.  
+This data package contains SNP array data from different platforms (Affymetrix and Immumina) and different types of copy-number regions. These regions were identified manually by the authors of the package and may be used to generate realistic data sets with known truth.
 
-These regions were identified manually by the authors of the package and may be used to generate realistic data sets with known truth.
+Currently the `acnr` package  contains three data sets curated from GEO:
 
-This package was initially build to serve as a data package for the jointseg package.
+    > library("acnr")
+    > listDataSets()
+    [1] "GSE11976_CRL2324" "GSE13372_HCC1143" "GSE29172_H1395"  
 
+This package was initially build to serve as a data package for the [jointseg](../jointseg/) package.
 
 ## Software status
 
