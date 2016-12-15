@@ -8,7 +8,7 @@ Currently the `acnr` package  contains three data sets curated from GEO:
     > listDataSets()
     [1] "GSE11976_CRL2324" "GSE13372_HCC1143" "GSE29172_H1395"  
 
-This package was initially build to serve as a data package for the [jointseg](../jointseg/) package.
+This package was initially build to serve as a data package for the [jointseg](https://github.com/mpierrejean/jointseg) package.
 
 ## Software status
 
