@@ -15,9 +15,9 @@
   \item{(0,0)}{Homozygous deletion} \item{(1,2)}{Single copy gain} 
   \item{(0,2)}{Copy-neutral LOH} \item{(2,2)}{Balanced two-copy gain} 
   \item{(1,3)}{Unbalanced two-copy gain} \item{(0,3)}{Single-copy gain with 
-  LOH} } } \item{genotype}{the (germline) genotype of SNPs. By definition,
+  LOH} } } \item{genotype}{the (germline) genotype of SNPs. By definition, 
   rows with missing genotypes are interpreted as non-polymorphic loci (a.k.a.
-  copy number probes).} \item{cellularity}{A numeric value between 0 and 1,
+  copy number probes).} \item{cellularity}{A numeric value between 0 and 1, 
   the percentage of tumor cells in the sample.} }}
 \source{
 \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13372} 
@@ -26,18 +26,24 @@
 \description{
 The GEO GSE13372 data set is from the Affymetrix GenomeWideSNP_6 chip type. 
 We have extracted one tumor/normal pair corresponding to the breast cancer 
-cell line HCC1143. For consistency with the other data sets in the package
-the tumor and normal samples are labeled according to their tumor
+cell line HCC1143. For consistency with the other data sets in the package 
+the tumor and normal samples are labeled according to their tumor 
 cellularity, that is, 100% and 0% cellularity, respectively.
 }
 \details{
 These data have been processed from the files available from GEO using 
-scripts that are included in the 'inst/preprocessing/GSE13372' directory of
-this package. This processing includes normalization of the raw CEL files
+scripts that are included in the 'inst/preprocessing/GSE13372' directory of 
+this package. This processing includes normalization of the raw CEL files 
 using the CRMAv2 method implemented in the aroma.affymetrix package.
 }
+\examples{
+dat <- loadCnRegionData("GSE13372_HCC1143")
+unique(dat$region)
+}
 \references{
-
+Chiang DY, Getz G, Jaffe DB, O'Kelly MJ et al. High-resolution
+  mapping of copy-number alterations with massively parallel sequencing. Nat
+  Methods 2009 Jan;6(1):99-103. PMID: 19043412
 
 Bengtsson, H., Wirapati , P. & Speed, T.P. (2009). A single-array
   preprocessing method for estimating full-resolution raw copy numbers from 

@@ -2,16 +2,19 @@
 #' 
 #' Load real, annotated copy number data
 #' 
-#' This function is a wrapper to load real genotyping array data taken from 
-#' dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen et 
-#' al, 2011) or from the Illumina HumanCNV370v1 chip type (Staaf et al, 2008)
+#' This function is a wrapper to load real genotyping array data taken from
 #' 
-#' @param dataSet name of one of the data sets of the package, see
-#'   \link{listDataSets}
-#' @param tumorFraction proportion of tumor cells in the "tumor" sample. Should 
-#'   be in .3, .5, .7, 1 if \code{dataSet=="GSE29172"}, in .14,.34,.50,.79,1 
-#'   when \code{dataSet=="GSE11976"}, an in 0, 1 when
-#'   \code{dataSet=="GSE13372"}, see \link{listTumorFractions}
+#' * a dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen
+#' et al, 2011), see \code{\link{ GSE29172_H1395}} * a dilution series from the
+#' Illumina HumanCNV370v1 chip type (Staaf et al, 2008), see
+#' \code{\link{GSE11976_CRL2324}} * a tumor/normal pair from the Affymetrix
+#' GenomeWideSNP_6 chip type (Chiang et al, 2008), see
+#' \code{\link{GSE13372_HCC1143}}
+#' 
+#' @param dataSet name of one of the data sets of the package, see 
+#'   \code{\link{listDataSets}}
+#' @param tumorFraction proportion of tumor cells in the "tumor" sample (a.k.a.
+#'   tumor cellularity). See \code{\link{listTumorFractions}}.
 #' @return a data.frame containing copy number data for different types of copy 
 #'   number regions.  Columns:\describe{ \item{c}{Total copy number} 
 #'   \item{b}{Allele B fraction (a.k.a. BAF)} \item{region}{a character value, 
@@ -25,58 +28,32 @@
 #'   genotype of SNPs. By definition, rows with missing genotypes are 
 #'   interpreted as non-polymorphic loci (a.k.a. copy number probes).}}
 #' @author Morgane Pierre-Jean and Pierre Neuvial
-#' @references Staaf, J., Lindgren, D., Vallon-Christersson, J., Isaksson, A., 
-#'   Goransson, H., Juliusson, G., ... & Ringn\'er, M. (2008). 
-#'   Segmentation-based detection of allelic imbalance and 
-#'   loss-of-heterozygosity in cancer cells using whole genome SNP arrays. 
-#'   Genome Biol, 9(9), R136.
-#'   
-#'   GEO data set: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE11976
-#'   
-#'   Rasmussen, M., Sundstr\"om, M., Kultima, H. G., Botling, J., Micke, P., 
-#'   Birgisson, H., Glimelius, B. & Isaksson, A. (2011). Allele-specific copy 
-#'   number analysis of tumor samples with aneuploidy and tumor heterogeneity. 
-#'   Genome Biology, 12(10), R108.
-#'   
-#'   GEO data sets: http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29172 
-#'   http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE26302
-#'   
-#'   Chiang DY, Getz G, Jaffe DB, O'Kelly MJ et al. High-resolution mapping of 
-#'   copy-number alterations with massively parallel sequencing. Nat Methods 
-#'   2009 Jan;6(1):99-103. PMID: 19043412
-#'   
-#'   GEO data set: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13372
-#'   
 #' @examples
 #' 
-#' affyDat <- loadCnRegionData(dataSet="GSE29172", tumorFraction=1)
+#' affyDat <- loadCnRegionData(dataSet="GSE29172_H1395", tumorFraction=1)
 #' str(affyDat)
 #' 
-#' illuDat <- loadCnRegionData(dataSet="GSE11976", tumorFraction=.79)
+#' illuDat <- loadCnRegionData(dataSet="GSE11976_CRL2324", tumorFraction=.79)
 #' str(illuDat)
 #' 
-#' affyDat2 <- loadCnRegionData(dataSet="GSE13372", tumorFraction=1)
+#' affyDat2 <- loadCnRegionData(dataSet="GSE13372_HCC1143", tumorFraction=1)
 #' str(affyDat2)
 #' 
 #' @export loadCnRegionData
-loadCnRegionData <- function(dataSet, tumorFraction=1){
+loadCnRegionData <- function(dataSet=listDataSets(), tumorFraction=1){
+    dataSet <- match.arg(dataSet)
     tumorFractions <- listTumorFractions(dataSet)
     if(!(tumorFraction %in% tumorFractions)) {
-        stop("'tumorFraction' should be in c(",
+        stop("Invalid 'tumorFraction' ", tf, ". 'tumorFraction' should be in c(",
              paste(tumorFractions, collapse=", "), ") for dataSet ", dataSet)
     }
-    chipType <- switch(dataSet,
-                       GSE11976="HumanCNV370v1",
-                       GSE13372="GenomeWideSNP_6",
-                       GSE29172="GenomeWideSNP_6")
-    sampleName <- switch(dataSet,
-                         GSE11976="CRL2324,BAF",
-                         GSE13372="HCC1143,GLEYSvsBL_GLEYS",
-                         GSE29172="H1395vsBL1395")
-    filename <- sprintf("%s,%s,cnRegions.rds", sampleName, 100*tumorFraction)
-    relPath <- file.path("extdata", dataSet, chipType, filename)
+    filename <- sprintf("%s.rds", dataSet)
+    relPath <- file.path("extdata", filename)
     pathname <- system.file(relPath, package="acnr")
-    readRDS(pathname)
+    dat <- readRDS(pathname)
+    cellularity <- NULL; rm(cellularity); ## To avoid a NOTE from R CMD check
+    sdat <- subset(dat, cellularity==tumorFraction)
+    sdat
 }
 
 ############################################################################

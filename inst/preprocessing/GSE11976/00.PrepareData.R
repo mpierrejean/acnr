@@ -1,29 +1,37 @@
-library(R.utils)
-## Data can be loaded at this place
-## "http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/"
+## Data can be retrieved from http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/
+## genomic DNA of breast carcinoma cells mixed with DNA from lymphoblastoid
+## cells at known proportions.  Genotypes are from lymphoblastoid cells.
 
-data = read.table("CRL2324_dilutionSeries_TableExport", header=TRUE, sep="\t")
+if (FALSE) {
+        url <- "http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/CRL2324_dilutionSeries_TableExport.zip"
+        tf <- "~/Downloads/CRL2324_dilutionSeries_TableExport.zip"
+        download.file(url, tf)
+}
+dat <- readr::read_tsv(tf)
 
 ## Keep only interesting columns
-## Use genomic DNA of breast carcinoma cells mixed with DNA from lymphoblastoid
-## cells at known proportions (100, 79, 50, 34, 14).
-## Genotype use are those of lymphoblastoid cells.
+nms <- names(dat)
+nms <- gsub("CRL2325\\.", "CRL2324_0pc_Tum\\.", nms)
+nms <- gsub("CRL2324\\.", "CRL2324_100pc_Tum\\.", nms)
+names(dat) <- nms
+nC <- nms[grep("Log R Ratio", nms)]
+pcts <- gsub("CRL2324_([0-9]+)pc_Tum.Log R Ratio", "\\1", nC)
 
-dat <- data[,c("Chr", "Position", "CRL2325.GType", "CRL2324.Log.R.Ratio",
-               "CRL2324.B.Allele.Freq", "CRL2324_79pc_Tum.Log.R.Ratio",
-               "CRL2324_79pc_Tum.B.Allele.Freq", "CRL2324_50pc_Tum.Log.R.Ratio",
-               "CRL2324_50pc_Tum.B.Allele.Freq", "CRL2324_34pc_Tum.Log.R.Ratio",
-               "CRL2324_34pc_Tum.B.Allele.Freq", "CRL2324_14pc_Tum.Log.R.Ratio",
-               "CRL2324_14pc_Tum.B.Allele.Freq", "CRL2325.Log.R.Ratio",
-               "CRL2325.B.Allele.Freq")]
+datN <- dat[,c("Chr", "Position", "CRL2324_0pc_Tum.GType")]
+names(datN) <-  c("chromosome", "position", "genotype")
+                 
+BAF <- sprintf("CRL2324_%spc_Tum.%s", pcts, "B Allele Freq")
+datBAF <- dat[, BAF]
+names(datBAF) <- sprintf("BAF_%s", pcts)
 
-## Rename columns
-names(dat) <-  c("chromosome", "Position", "genotype","logR_100", "baf_100",
-                 "logR_79", "baf_79","logR_50", "baf_50","logR_34", "baf_34",
-                 "logR_14", "baf_14", "logR_0", "baf_0")
+LRR <- sprintf("CRL2324_%spc_Tum.%s", pcts, "Log R Ratio")
+datLRR <- dat[, LRR]
+names(datLRR) <- sprintf("LRR_%s", pcts)
 
-## Define genotype
-dat$muN <- (as.numeric(dat$genotype)-1)/2
-dat$muN[which(dat$muN==1.5)] <- NA
+df <- cbind(datN, datLRR, datBAF)
 
-saveRDS(dat,"CRL2324_dilutionSeries.rds")
+## Map genotype to 0,1/2,1
+fgeno <- gsub("A", "", df$genotype)
+fgeno[fgeno=="NC"] <- NA
+df$muN <- nchar(fgeno)
+saveRDS(df,"CRL2324_dilutionSeries.rds")

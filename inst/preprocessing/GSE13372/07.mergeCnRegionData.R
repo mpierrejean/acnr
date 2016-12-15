@@ -1,20 +1,22 @@
-library(R.utils);
+library("R.utils");
 
-if (FALSE) {
-  ## Define CN regions:
-  ## source("05.defineCopyNumberSegments.R")
-  source("trunk/inst/testScripts/system/preprocessing/GSE29172/05.defineCopyNumberSegments.R")
-  str(regDat)
-}
+dataSet <- "GSE13372"
+chipType <- "GenomeWideSNP_6"
+
+## Define CN regions
+regFile <- "05.defineCopyNumberSegments.R"
+pn <- file.path("preprocessing", dataSet, regFile)
+sf <- system.file(pn, package="acnr")
+source(sf)
+str(regDat)
 
 regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
 
-dataSet <- "GSE13372,ASCRMAv2"
+ds <- sprintf("%s,ASCRMAv2", dataSet)
 chipType <- "GenomeWideSNP_6"
 
-
-path <- file.path(regPath, dataSet, chipType);
+path <- file.path(regPath, ds, chipType);
 path <- Arguments$getReadablePath(path);
 
 sampleName <- "HCC1143_GLEYSvsHCC1143BL_GLEYS"
@@ -22,31 +24,32 @@ pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
 pcts <- unique(gsub(pattern, "\\1", filenames))
 
-savPath <- file.path("extdata", "GSE13372", chipType)
-savPath <- Arguments$getWritablePath(savPath);
-  
+savPath <- Arguments$getWritablePath("inst/extdata")
+
 types <- regDat[["type"]]
+datList <- list()
 for (pct in pcts) {
-  print(pct)
-  pattern <- sprintf("%s,%s,(.*).rds",sampleName, pct)
-  filenames <- list.files(path, pattern=pattern)
-  types <- gsub(pattern, "\\1", filenames)
-  
-  pathnames <- file.path(path, filenames)
-  names(pathnames) <- types
-  datList <- lapply(pathnames, readRDS)
-  dat <- NULL
-  for (dd in names(datList)) {
-    datDD <- datList[[dd]]
-    datDD$region <- dd
-    dat <- rbind(dat, datDD)
-  }
-  str(dat)
-  rownames(dat) <- NULL
-  shortSN <-"HCC1143,GLEYSvsBL_GLEYS"
-  filename <- sprintf("%s,%s,cnRegions.rds", shortSN, pct)
-  pathname <- file.path(savPath, filename)
-  saveRDS(dat, file=pathname)
+    print(pct)
+    pattern <- sprintf("%s,%s,(.*).rds", sampleName, pct)
+    filenames <- list.files(path, pattern=pattern)
+    types <- gsub(pattern, "\\1", filenames)
+    
+    pathnames <- file.path(path, filenames)
+    for (tt in seq(along=types)) {
+        pathname <- pathnames[tt]
+        typ <- types[tt]
+        dat <- readRDS(pathname)
+        dat$region <- typ
+        dat$cellularity <- as.numeric(pct)/100
+        tag <- sprintf("%s,%s", pct, typ)
+        datList[[tag]] <- dat
+    } 
 }
+dat <- do.call("rbind", datList)
+rownames(dat) <- NULL
+str(dat)
 
-
+dsName <- "GSE13372_HCC1143"
+filename <- sprintf("%s.rds", dsName)
+pathname <- file.path(savPath, filename)
+saveRDS(dat, file=pathname)

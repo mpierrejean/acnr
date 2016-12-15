@@ -8,7 +8,7 @@ datI$posMb <- datI$Position/1e6;
 
 
 pct <- c("100","79", "50", "34", "0") 
-dataSet <- "CRL2324,BAF"
+dataSet <- "GSE11976,BAF"
 chipType <- "HumanCNV370v1"
 
 for(pp in pct){

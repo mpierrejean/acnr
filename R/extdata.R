@@ -2,7 +2,7 @@
 #' 
 #' The GEO GSE29172 data set is a dilution series from the Affymetrix 
 #' GenomeWideSNP_6 chip type. The GEO GSE26302 data set contains the experiment 
-#' corresponding to the matched normal (i.e. 0% dilution).
+#' corresponding to the matched normal (i.e. 0\% dilution).
 #' 
 #' These data have been processed from the files available from GEO using 
 #' scripts that are included in the 'inst/preprocessing/GSE29172' directory of
@@ -43,6 +43,9 @@
 #'   normalization of allele-specific tumor copy numbers from a single pair of
 #'   tumor-normal genotyping microarrays. BMC bioinformatics 11 (2010), p. 245.
 #'   
+#' @examples
+#' dat <- loadCnRegionData("GSE29172_H1395")
+#' unique(dat$region)
 NULL
 
 #' Annotated copy-number regions from the GEO GSE11976 data set.
@@ -79,6 +82,9 @@ NULL
 #'  Segmentation-based detection of allelic imbalance and 
 #'  loss-of-heterozygosity in cancer cells using whole genome SNP arrays. 
 #'  Genome Biol, 9(9), R136.
+#' @examples
+#' dat <- loadCnRegionData("GSE11976_CRL2324")
+#' unique(dat$region)
 NULL
 
 
@@ -86,13 +92,13 @@ NULL
 #' 
 #' The GEO GSE13372 data set is from the Affymetrix GenomeWideSNP_6 chip type. 
 #' We have extracted one tumor/normal pair corresponding to the breast cancer 
-#' cell line HCC1143. For consistency with the other data sets in the package
-#' the tumor and normal samples are labeled according to their tumor
+#' cell line HCC1143. For consistency with the other data sets in the package 
+#' the tumor and normal samples are labeled according to their tumor 
 #' cellularity, that is, 100% and 0% cellularity, respectively.
 #' 
 #' These data have been processed from the files available from GEO using 
-#' scripts that are included in the 'inst/preprocessing/GSE13372' directory of
-#' this package. This processing includes normalization of the raw CEL files
+#' scripts that are included in the 'inst/preprocessing/GSE13372' directory of 
+#' this package. This processing includes normalization of the raw CEL files 
 #' using the CRMAv2 method implemented in the aroma.affymetrix package.
 #' 
 #' @name GSE13372_HCC1143
@@ -108,14 +114,17 @@ NULL
 #'   \item{(0,0)}{Homozygous deletion} \item{(1,2)}{Single copy gain} 
 #'   \item{(0,2)}{Copy-neutral LOH} \item{(2,2)}{Balanced two-copy gain} 
 #'   \item{(1,3)}{Unbalanced two-copy gain} \item{(0,3)}{Single-copy gain with 
-#'   LOH} } } \item{genotype}{the (germline) genotype of SNPs. By definition,
+#'   LOH} } } \item{genotype}{the (germline) genotype of SNPs. By definition, 
 #'   rows with missing genotypes are interpreted as non-polymorphic loci (a.k.a.
-#'   copy number probes).} \item{cellularity}{A numeric value between 0 and 1,
+#'   copy number probes).} \item{cellularity}{A numeric value between 0 and 1, 
 #'   the percentage of tumor cells in the sample.} }
 #' @source \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13372} 
 #'   \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE13372}
 #'   
-#' @references
+#' @references Chiang DY, Getz G, Jaffe DB, O'Kelly MJ et al. High-resolution
+#'   mapping of copy-number alterations with massively parallel sequencing. Nat
+#'   Methods 2009 Jan;6(1):99-103. PMID: 19043412
+
 #' 
 #' @references Bengtsson, H., Wirapati , P. & Speed, T.P. (2009). A single-array
 #'   preprocessing method for estimating full-resolution raw copy numbers from 
@@ -126,4 +135,8 @@ NULL
 #'   normalization of allele-specific tumor copy numbers from a single pair of 
 #'   tumor-normal genotyping microarrays. BMC bioinformatics 11 (2010), p. 245.
 #'   
+#' @examples
+#' dat <- loadCnRegionData("GSE13372_HCC1143")
+#' unique(dat$region)
+
 NULL

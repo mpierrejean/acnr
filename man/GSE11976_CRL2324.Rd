@@ -36,4 +36,8 @@ These data have been processed from the files available at
 http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/ using scripts that 
 are included in the 'inst/preprocessing/GSE11976' directory of this package.
 }
+\examples{
+dat <- loadCnRegionData("GSE11976_CRL2324")
+unique(dat$region)
+}
 

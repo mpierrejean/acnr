@@ -8,10 +8,14 @@ inst/doc
 
 ## symbolic links to data directories
 annotationData
+cnRegionData
+probeData
+plmData
+rawData
 totalAndFracBData
 wholeGenomeData
 png
-cnRegionData
+
 
 ## OS X
 .DS_Store

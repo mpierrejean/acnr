@@ -25,8 +25,8 @@ library("acnr")
 ## Description of the annotated data sets
 
 ```{r}
-tf <- .5
-dataSets <- c("GSE29172", "GSE11976")
+tf <- 1
+dataSets <- listDataSets()
 
 regList <- lapply(dataSets, FUN=function(ds) {
     regDat <- loadCnRegionData(dataSet=ds, tumorFraction=tf) 

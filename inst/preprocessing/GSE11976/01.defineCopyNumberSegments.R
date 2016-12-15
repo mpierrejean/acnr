@@ -7,4 +7,3 @@ regDat <- data.frame(C1=C1C2[, "C1"],
                      end=c(72, 35, 64, Inf, 15, 50, 60.4),
                      stringsAsFactors=FALSE)
 regDat$type <- sprintf("(%s,%s)", regDat[["C1"]], regDat[["C2"]])
-

@@ -1,11 +1,14 @@
-library(R.utils);
+library("R.utils");
+library("aroma.light");
 
-if (FALSE) {
-  ## Define CN regions:
-  ## source("05.defineCopyNumberSegments.R")
-  source("trunk/inst/testScripts/system/preprocessing/GSE13372/05.defineCopyNumberSegments.R")
-  str(regDat)
-}
+dataSet <- "GSE13372"
+
+## Define CN regions
+regFile <- "05.defineCopyNumberSegments.R"
+pn <- file.path("preprocessing", dataSet, regFile)
+sf <- system.file(pn, package="acnr")
+source(sf)
+str(regDat)
 
 datPath <- "wholeGenomeData";
 datPath <- Arguments$getReadablePath(datPath);
@@ -71,3 +74,4 @@ for (kk in seq(along=filenames)) {
     saveRDS(datSS, file=pathname)
   }
 }
+

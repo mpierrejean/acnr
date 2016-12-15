@@ -5,11 +5,12 @@
 #' @export
 #'
 #' @examples
-#' dataSets <- listDataSets()
+#' listDataSets()
 #' 
 listDataSets <- function() {
     path <- system.file("extdata", package="acnr")
-    list.files(path)
+    files <- list.files(path)
+    gsub(".rds$", "", files)
 }
 
 

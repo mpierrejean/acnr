@@ -26,13 +26,17 @@
 \description{
 The GEO GSE29172 data set is a dilution series from the Affymetrix 
 GenomeWideSNP_6 chip type. The GEO GSE26302 data set contains the experiment 
-corresponding to the matched normal (i.e. 0% dilution).
+corresponding to the matched normal (i.e. 0\% dilution).
 }
 \details{
 These data have been processed from the files available from GEO using 
 scripts that are included in the 'inst/preprocessing/GSE29172' directory of
 this package. This processing includes normalization of the raw CEL files
 using the CRMAv2 method implemented in the aroma.affymetrix package.
+}
+\examples{
+dat <- loadCnRegionData("GSE29172_H1395")
+unique(dat$region)
 }
 \references{
 Rasmussen, M., Sundstr\"om, M., Kultima, H. G., Botling, J., 

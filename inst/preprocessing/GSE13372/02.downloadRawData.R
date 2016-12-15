@@ -13,12 +13,10 @@ verbose && enter(verbose, "Downloading raw data");
 #    GSM337641.CEL, ..., GSM337708.CEL [68]
 #
 # Overall design:
-#  Breast cancer cell lines HCC38 and HCC1143 and paired B 
-#  lymphoblastoid cell lines HCC38-BL and HCC1143-BL were
-#  purchased from ATCC. [...] To mimic tumor containing normal cells,
-#  DNA from HCC38 and HCC1143 cells was mixed with DNA from autologous
-#  B lymphoblastoid cells HCC38-BL and HCC1143-BL, respectively,
-#  in ratios (w/w) 100:0, 80:20, 60:40, 40:60, and 20:80.
+#  21 replicates of HCC1143 (breast ductal carcinoma), 21 replicates of
+#  HCC1143BL (matched normal), 13 replicates of HCC1954 (breast ductal
+#  carcinoma), 11 replicates of HCC1954BL (matched normal), 1 replicate of
+#  NCI-H2347 (lung adenocarcinoma), 1 replicate of NCI-H2347BL (matched normal)
 #
 # URL: http://www.ncbi.nlm.nih.gov/projects/geo/query/acc.cgi?acc=GSE13372
 ##########################################################################

@@ -1,47 +1,48 @@
-library(R.utils)
-source("trunk/inst/testScripts/system/preprocessing/GSE11976/01.defineCopyNumberSegments.R")
+library("R.utils")
+sf <- system.file("preprocessing/GSE11976/01.defineCopyNumberSegments.R", package="acnr")
+source(sf)
 str(regDat)
-
 
 regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
 
-dataSet <- "CRL2324,BAF"
+dataSet <- "GSE11976,BAF"
 chipType <- "HumanCNV370v1"
 
 path <- file.path(regPath, dataSet, chipType);
 path <- Arguments$getReadablePath(path);
 
-sampleName <- "CRL2324,BAF"
+sampleName <- "CRL2324"
 pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
 pcts <- unique(gsub(pattern, "\\1", filenames))
 
-savPath <- file.path("extdata", "GSE11976", chipType)
-savPath <- Arguments$getWritablePath(savPath);
+savPath <- Arguments$getWritablePath("inst/extdata")
 
 types <- regDat[["type"]]
-pct <- c("100","79", "50", "34", "0") 
-for (pp in pct) {
-    print(pp)
-    pattern <- sprintf("CRL2324,BAF,%s,(.*).rds", pp)
+datList <- list()
+for (pct in pcts) {
+    print(pct)
+    pattern <- sprintf("%s,%s,(.*).rds", sampleName, pct)
     filenames <- list.files(path, pattern=pattern)
     types <- gsub(pattern, "\\1", filenames)
     
     pathnames <- file.path(path, filenames)
-    names(pathnames) <- types
-    datList <- lapply(pathnames, readRDS)
-    dat <- NULL
-    for (dd in names(datList)) {
-        datDD <- datList[[dd]]
-        datDD$region <- dd
-        dat <- rbind(dat, datDD)
-    }
-    str(dat)
-
-    filename <- sprintf("%s,%s,cnRegions.rds", dataSet, pp)
-    pathname <- file.path(savPath, filename)
-    saveRDS(dat, file=pathname)
+    for (tt in seq(along=types)) {
+        pathname <- pathnames[tt]
+        typ <- types[tt]
+        dat <- readRDS(pathname)
+        dat$region <- typ
+        dat$cellularity <- as.numeric(pct)/100
+        tag <- sprintf("%s,%s", pct, typ)
+        datList[[tag]] <- dat
+    } 
 }
+dat <- do.call("rbind", datList)
+rownames(dat) <- NULL
+str(dat)
 
-
+dsName <- "GSE11976_CRL2324"
+filename <- sprintf("%s.rds", dsName)
+pathname <- file.path(savPath, filename)
+saveRDS(dat, file=pathname)
