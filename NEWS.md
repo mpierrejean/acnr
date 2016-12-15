@@ -6,6 +6,7 @@
 * Data sets are now documented individually.
 * Updated scripts for the preprocessing of data set GSE13372.
 * Now exporting 'betaT' and 'betaN' for data set GSE13372.
+* 12 tumor cellularities are now available for data set GSE11976.
 
 ## Version: 0.2.8 [2016-11-25]
 
