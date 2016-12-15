@@ -14,7 +14,7 @@ name of one of the data sets of the package, see
 List available data sets
 }
 \examples{
-dataSets <- listDataSets()
+listDataSets()
 
 }
 

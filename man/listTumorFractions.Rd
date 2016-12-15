@@ -7,7 +7,7 @@
 listTumorFractions(dataSet)
 }
 \arguments{
-\item{dataSet}{The name of a data set from the package, see}
+\item{dataSet}{The name of a data set from the package, see \link{listDataSets}}
 }
 \value{
 A numeric vector, the available tumor fractions for a data set

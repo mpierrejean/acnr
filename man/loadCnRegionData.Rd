@@ -4,7 +4,7 @@
 \alias{loadCnRegionData}
 \title{loadCnRegionData}
 \usage{
-loadCnRegionData(dataSet, tumorFraction = 1)
+loadCnRegionData(dataSet = listDataSets(), tumorFraction = 1)
 }
 \arguments{
 \item{dataSet}{name of one of the data sets of the package, see
@@ -33,16 +33,18 @@ a data.frame containing copy number data for different types of copy
 Load real, annotated copy number data
 }
 \details{
-This function is a wrapper to load real genotyping array data taken from 
-dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen et 
-al, 2011) or from the Illumina HumanCNV370v1 chip type (Staaf et al, 2008)
+This function is a wrapper to load real genotyping array data taken from
+
+* a dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen et 
+al, 2011)
+* a dilution series from the Illumina HumanCNV370v1 chip type (Staaf et al, 2008)
 }
 \examples{
 
-affyDat <- loadCnRegionData(dataSet="GSE29172", tumorFraction=1)
+affyDat <- loadCnRegionData(dataSet="GSE29172_H1395", tumorFraction=1)
 str(affyDat)
 
-illuDat <- loadCnRegionData(dataSet="GSE11976", tumorFraction=.79)
+illuDat <- loadCnRegionData(dataSet="GSE11976_CRL2324", tumorFraction=.79)
 str(illuDat)
 
 affyDat2 <- loadCnRegionData(dataSet="GSE13372", tumorFraction=1)
