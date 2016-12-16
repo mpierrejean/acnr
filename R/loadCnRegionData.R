@@ -5,7 +5,7 @@
 #' This function is a wrapper to load real genotyping array data taken from
 #' 
 #' * a dilution series from the Affymetrix GenomeWideSNP_6 chip type (Rasmussen
-#' et al, 2011), see \code{\link{ GSE29172_H1395}} * a dilution series from the
+#' et al, 2011), see \code{\link{GSE29172_H1395}} * a dilution series from the
 #' Illumina HumanCNV370v1 chip type (Staaf et al, 2008), see
 #' \code{\link{GSE11976_CRL2324}} * a tumor/normal pair from the Affymetrix
 #' GenomeWideSNP_6 chip type (Chiang et al, 2008), see
