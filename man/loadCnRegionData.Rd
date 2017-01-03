@@ -17,7 +17,7 @@ tumor cellularity). See \code{\link{listTumorFractions}}.}
 a data.frame containing copy number data for different types of copy 
   number regions.  Columns:\describe{ \item{c}{Total copy number} 
   \item{b}{Allele B fraction (a.k.a. BAF)} \item{region}{a character value, 
-  annotation label for the region.  Preferably encoded as \code{"(C1,C2)"}, 
+  annotation label for the region.  Should be encoded as \code{"(C1,C2)"}, 
   where \code{C1} denotes the minor copy number and \code{C2} denotes the 
   major copy number.  For example, \describe{ \item{(1,1)}{Normal} 
   \item{(0,1)}{Hemizygous deletion} \item{(0,0)}{Homozygous deletion} 

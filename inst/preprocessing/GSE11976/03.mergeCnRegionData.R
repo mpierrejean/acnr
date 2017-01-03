@@ -21,7 +21,13 @@ savPath <- Arguments$getWritablePath("inst/extdata")
 
 types <- regDat[["type"]]
 datList <- list()
+
+toExclude <- c("23", "45", "47") ## tumorFractions to exclude (clear inconsistencies between reported fraction and experimental results, see Table 3 in Staaf (2008))
+
 for (pct in pcts) {
+    if (pct %in% toExclude) {
+        next;
+    }
     print(pct)
     pattern <- sprintf("%s,%s,(.*).rds", sampleName, pct)
     filenames <- list.files(path, pattern=pattern)
