@@ -1,4 +1,5 @@
 sf <- system.file("preprocessing/GSE11976/01.defineCopyNumberSegments.R", package="acnr")
+source(sf)
 str(regDat)
 
 datI <- readRDS("CRL2324_dilutionSeries.rds")

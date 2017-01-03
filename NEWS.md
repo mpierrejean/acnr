@@ -2,7 +2,9 @@
 
 ## Version: 0.3.1 [2017-01-03]
  
-* BUG FIX in data set GSE13372: tumor genotypes were mislabeled as normal. 
+* BUG FIX in data set GSE13372_HCC1143: tumor genotypes were mislabeled as normal. 
+* BUG FIX in data set GSE11976_CRL2324: genotypes were in 0, 1, 2 instead of 0, 1/2, 1. 
+* Added a test to check the consistency of germline genotypes.
 
 ## Version: 0.3.0 [2016-12-15]
 

@@ -2,9 +2,9 @@
 ## genomic DNA of breast carcinoma cells mixed with DNA from lymphoblastoid
 ## cells at known proportions.  Genotypes are from lymphoblastoid cells.
 
-if (FALSE) {
+tf <- "~/Downloads/CRL2324_dilutionSeries_TableExport.zip"
+if (!file.exists(tf)) {
         url <- "http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/CRL2324_dilutionSeries_TableExport.zip"
-        tf <- "~/Downloads/CRL2324_dilutionSeries_TableExport.zip"
         download.file(url, tf)
 }
 dat <- readr::read_tsv(tf)
@@ -33,5 +33,5 @@ df <- cbind(datN, datLRR, datBAF)
 ## Map genotype to 0,1/2,1
 fgeno <- gsub("A", "", df$genotype)
 fgeno[fgeno=="NC"] <- NA
-df$muN <- nchar(fgeno)
+df$muN <- nchar(fgeno)/2
 saveRDS(df,"CRL2324_dilutionSeries.rds")
