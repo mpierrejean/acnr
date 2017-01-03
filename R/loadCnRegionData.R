@@ -44,7 +44,7 @@ loadCnRegionData <- function(dataSet=listDataSets(), tumorFraction=1){
     dataSet <- match.arg(dataSet)
     tumorFractions <- listTumorFractions(dataSet)
     if(!(tumorFraction %in% tumorFractions)) {
-        stop("Invalid 'tumorFraction' ", tf, ". 'tumorFraction' should be in c(",
+        stop("Invalid 'tumorFraction' ", tumorFraction, ". 'tumorFraction' should be in c(",
              paste(tumorFractions, collapse=", "), ") for dataSet ", dataSet)
     }
     filename <- sprintf("%s.rds", dataSet)

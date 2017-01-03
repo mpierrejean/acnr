@@ -1,4 +1,5 @@
 ## Adapted from http://aroma-project.org/vignettes/PairedPSCBS-lowlevel
+library("aroma.affymetrix")
 
 dataSet <- "GSE13372";
 chipType <- "GenomeWideSNP_6"
@@ -7,6 +8,8 @@ tags <- "ACC,ra,-XY,BPN,-XY,AVG,FLN,-XY"
 ds <- AromaUnitTotalCnBinarySet$byName(dataSet, tags=tags, chipType=chipType)
 length(ds)
 
+## Extract only one tumor and two matching normals
+nms <- c(T="GSM337641", N="GSM337662", R="GSM337663")
 dsE <- extract(ds, indexOf(ds, nms))
 tumorName <- "HCC1143_GLEYS"
 normalName <- "HCC1143BL_GLEYS"

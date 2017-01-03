@@ -1,5 +1,9 @@
 # Package: acnr
 
+## Version: 0.3.1 [2017-01-03]
+ 
+* BUG FIX in data set GSE13372: tumor genotypes were mislabeled as normal. 
+
 ## Version: 0.3.0 [2016-12-15]
 
 * Data sets are now stored in `inst/extData`. 

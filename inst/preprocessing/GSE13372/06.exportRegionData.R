@@ -1,5 +1,4 @@
 library("R.utils");
-library("aroma.light");
 
 dataSet <- "GSE13372"
 
@@ -37,8 +36,11 @@ for (kk in seq(along=filenames)) {
   rm(pathname)
   
   ## run TumorBoost
-  betaTN <- normalizeTumorBoost(betaT=dat$betaT,betaN=dat$betaN)
-  muN <- callNaiveGenotypes(dat$betaN)
+  muN <- aroma.light::callNaiveGenotypes(dat$betaN)
+  gens <- table(muN, exclude = NULL)
+  stopifnot(all(c("0", "0.5", "1") %in% names(gens)))  ## sanity check: are all genotypes represented?  
+  betaTN <- aroma.light::normalizeTumorBoost(betaT=dat$betaT,betaN=dat$betaN, muN=muN)
+  
   dat.norm <- cbind(dat, muN, betaTN, b=2*abs(betaTN-1/2))
   
   regPath <- "png/regions"
