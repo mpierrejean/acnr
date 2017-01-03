@@ -2,17 +2,28 @@ sf <- system.file("preprocessing/GSE11976/01.defineCopyNumberSegments.R", packag
 source(sf)
 str(regDat)
 
-datI <- readRDS("CRL2324_dilutionSeries.rds")
+dataSet <- "GSE11976"
+chipType <- "HumanCNV370v1"
+
+datPath <- "wholeGenomeData"; ## A symbolic link to "/home/share/Data/wholeGenomeData"
+datPath <- Arguments$getReadablePath(datPath);
+ds <- sprintf("%s,BeadStudio", dataSet)
+path <- file.path(datPath, ds, chipType);
+path <- Arguments$getReadablePath(path);
+
+## read
+fileName <- sprintf("CRL2324_dilutionSeries.rds", dataSet)
+pathname <- file.path(path, fileName)
+datI <- readRDS(pathname)
+
 datI$posMb <- datI$position/1e6;
 nms <- names(datI)[grep("^LRR", names(datI))]
 pcts <- gsub("LRR_([0-9]+)", "\\1", nms)
 
 sampleName <- "CRL2324"
-dataSet <- "GSE11976,BAF"
-chipType <- "HumanCNV370v1"
 savPath <- "cnRegionData"
 savPath <- Arguments$getWritablePath(savPath)
-path <- file.path(savPath, dataSet, chipType);
+path <- file.path(savPath, ds, chipType);
 path <- Arguments$getWritablePath(path)
 
 for (rr in 1:nrow(regDat)) {

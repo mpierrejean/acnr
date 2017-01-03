@@ -2,6 +2,8 @@
 ## genomic DNA of breast carcinoma cells mixed with DNA from lymphoblastoid
 ## cells at known proportions.  Genotypes are from lymphoblastoid cells.
 
+dataSet <- "GSE11976"
+chipType <- "HumanCNV370v1"
 tf <- "~/Downloads/CRL2324_dilutionSeries_TableExport.zip"
 if (!file.exists(tf)) {
         url <- "http://cbbp.thep.lu.se/~markus/software/BAFsegmentation/CRL2324_dilutionSeries_TableExport.zip"
@@ -34,4 +36,15 @@ df <- cbind(datN, datLRR, datBAF)
 fgeno <- gsub("A", "", df$genotype)
 fgeno[fgeno=="NC"] <- NA
 df$muN <- nchar(fgeno)/2
-saveRDS(df,"CRL2324_dilutionSeries.rds")
+
+datPath <- "wholeGenomeData"; ## A symbolic link to "/home/share/Data/wholeGenomeData"
+datPath <- Arguments$getReadablePath(datPath);
+ds <- sprintf("%s,BeadStudio", dataSet)
+path <- file.path(datPath, ds, chipType);
+rm(ds);
+path <- Arguments$getWritablePath(path);
+
+## save  
+fileName <- sprintf("CRL2324_dilutionSeries.rds", dataSet)
+pathname <- file.path(path, fileName)
+saveRDS(df, file=pathname)
