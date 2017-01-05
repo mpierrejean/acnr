@@ -1,4 +1,3 @@
-library("acnr")
 context("Consistency of data sets with respect to tumor fractions")
 
 test_that("Tumor fractions are in [0,1]", {

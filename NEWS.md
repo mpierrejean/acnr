@@ -1,9 +1,9 @@
 # Package: acnr
 
-## Version: 0.3.1 [2017-01-03]
- 
+## Version: 0.3.1 [2017-01-05]
+
 * BUG FIX in data set GSE13372_HCC1143: tumor genotypes were mislabeled as normal (Issue #9)
-* BUG FIX in data set GSE11976_CRL2324: genotypes were in 0, 1, 2 instead of 0, 1/2, 1. 
+* BUG FIX in data set GSE11976_CRL2324: genotypes were in 0, 1, 2 instead of 0, 1/2, 1.
 * Added a test to check the consistency of germline genotypes.
 * Added other tests to check the internal consistency of all data sets (colum names, germline data, region annotation) to address Issues #6 and #8.
 * Removed tumor fractions 0.23, 0.45, and 0.47 for which the cellularity is clearly inconsistent with experimental results, see Table 3 in Staaf (2008).
@@ -11,7 +11,7 @@
 
 ## Version: 0.3.0 [2016-12-15]
 
-* Data sets are now stored in `inst/extData`. 
+* Data sets are now stored in `inst/extData`.
 * Data sets are now documented individually.
 * Updated scripts for the preprocessing of data set GSE13372.
 * Now exporting 'betaT' and 'betaN' for data set GSE13372.

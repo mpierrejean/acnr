@@ -1,4 +1,3 @@
-library("acnr")
 context("Presence of all germline genotypes")
 
 allGenotypes <- function(dataSet, tumorFraction) {

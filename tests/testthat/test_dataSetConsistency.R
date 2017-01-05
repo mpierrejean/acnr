@@ -1,4 +1,3 @@
-library("acnr")
 context("Consistency of internal data sets")
 
 requiredColnames <- function(dataSet, expected) {
@@ -19,8 +18,8 @@ annotationConsistency <- function(dataSet) {
     dat <- loadCnRegionData(dataSet=dataSet, tumorFraction=tf1)
     geno <- dat[["genotype"]]
     reg <- dat[["region"]]
-    
-    for (tf in tfs[-1]) { 
+
+    for (tf in tfs[-1]) {
         dat <- loadCnRegionData(dataSet=dataSet, tumorFraction=tf)
         expect_identical(dat[["genotype"]], geno)
         expect_identical(dat[["region"]], reg)

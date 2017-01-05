@@ -1,4 +1,3 @@
-library("acnr")
 context("Consistency between mean total copy numbers and region labels")
 
 getTotalCopyNumbers <- function(dataSet, tumorFraction) {
@@ -15,7 +14,7 @@ test_that("Ordering of mean total copy number is consistent with region annotati
         for (tumorFraction in listTumorFractions(dataSet)) {
             if (tumorFraction==0) {
                 next;
-            } 
+            }
             tcn <- getTotalCopyNumbers(dataSet, tumorFraction)
             expect_equal(order(tcn), seq(along=tcn))
         }
