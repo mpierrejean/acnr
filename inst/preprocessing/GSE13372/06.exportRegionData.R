@@ -2,12 +2,14 @@ library("R.utils");
 
 dataSet <- "GSE13372"
 
-## Define CN regions
-regFile <- "05.defineCopyNumberSegments.R"
-pn <- file.path("preprocessing", dataSet, regFile)
-sf <- system.file(pn, package="acnr")
-source(sf)
-str(regDat)
+if (FALSE) {
+    ## Define CN regions
+    regFile <- "05.defineCopyNumberSegments.R"
+    pn <- file.path("preprocessing", dataSet, regFile)
+    sf <- system.file(pn, package="acnr")
+    source(sf)
+    str(regDat)
+}
 
 datPath <- "wholeGenomeData";
 datPath <- Arguments$getReadablePath(datPath);

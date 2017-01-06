@@ -31,7 +31,6 @@ thetaN <- dat[,"total", "R"];
 betaN <- dat[,"fracB", "R" ];
 
 datPath <- "wholeGenomeData";
-## A symbolic link to "/home/share/Data/wholeGenomeData"
 datPath <- Arguments$getWritablePath(datPath);
 chipType <- getChipType(dsT, full=FALSE)
 dsName <- getName(dsT)

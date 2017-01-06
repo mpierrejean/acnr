@@ -1,5 +1,9 @@
 # Package: acnr
 
+## Version: 0.3.2 [2017-01-06]
+
+* Updated data set GSE13372_HCC1143 to make all regions have a comparable number of data points (0,2) was ~7x bigger than the other ones
+
 ## Version: 0.3.1 [2017-01-05]
 
 * BUG FIX in data set GSE13372_HCC1143: tumor genotypes were mislabeled as normal (Issue #9)

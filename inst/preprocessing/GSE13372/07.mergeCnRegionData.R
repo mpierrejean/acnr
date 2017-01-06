@@ -2,13 +2,16 @@ library("R.utils");
 
 dataSet <- "GSE13372"
 chipType <- "GenomeWideSNP_6"
+sampleName <- "HCC1143_GLEYSvsHCC1143BL_GLEYS"
 
-## Define CN regions
-regFile <- "05.defineCopyNumberSegments.R"
-pn <- file.path("preprocessing", dataSet, regFile)
-sf <- system.file(pn, package="acnr")
-source(sf)
-str(regDat)
+if (FALSE) {
+    ## Define CN regions
+    regFile <- "05.defineCopyNumberSegments.R"
+    pn <- file.path("preprocessing", dataSet, regFile)
+    sf <- system.file(pn, package="acnr")
+    source(sf)
+    str(regDat)
+}
 
 regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
@@ -19,7 +22,6 @@ chipType <- "GenomeWideSNP_6"
 path <- file.path(regPath, ds, chipType);
 path <- Arguments$getReadablePath(path);
 
-sampleName <- "HCC1143_GLEYSvsHCC1143BL_GLEYS"
 pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
 pcts <- unique(gsub(pattern, "\\1", filenames))

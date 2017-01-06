@@ -2,6 +2,7 @@ library("R.utils");
 
 dataSet <- "GSE29172"
 chipType <- "GenomeWideSNP_6"
+sampleName <- "H1395vsBL1395"
 
 ## Define CN regions
 regFile <- "05.defineCopyNumberSegments.R"
@@ -14,12 +15,9 @@ regPath <- "cnRegionData";
 regPath <- Arguments$getReadablePath(regPath);
 
 ds <- sprintf("%s,ASCRMAv2", dataSet)
-chipType <- "GenomeWideSNP_6"
 
 path <- file.path(regPath, ds, chipType);
 path <- Arguments$getReadablePath(path);
-
-sampleName <- "H1395vsBL1395"
 
 pattern <- sprintf("%s,([0-9]+),\\(([0-9]),([0-9])\\).rds", sampleName)
 filenames <- list.files(path, pattern=pattern)
