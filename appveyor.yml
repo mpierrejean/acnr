@@ -37,7 +37,7 @@ install:
 
 build_script:
   - echo Current directory=%CD%
-  - travis-tool.sh install_r R.utils knitr xtable rmarkdown
+  - travis-tool.sh install_r R.utils knitr xtable rmarkdown testthat
   - travis-tool.sh install_bioc BiocStyle aroma.light
 
 test_script:
