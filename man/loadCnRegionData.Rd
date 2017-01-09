@@ -4,27 +4,27 @@
 \alias{loadCnRegionData}
 \title{loadCnRegionData}
 \usage{
-loadCnRegionData(dataSet = listDataSets(), tumorFraction = 1)
+loadCnRegionData(dataSet, tumorFraction = 1)
 }
 \arguments{
-\item{dataSet}{name of one of the data sets of the package, see 
+\item{dataSet}{name of one of the data sets of the package, see
 \code{\link{listDataSets}}}
 
 \item{tumorFraction}{proportion of tumor cells in the "tumor" sample (a.k.a.
 tumor cellularity). See \code{\link{listTumorFractions}}.}
 }
 \value{
-a data.frame containing copy number data for different types of copy 
-  number regions.  Columns:\describe{ \item{c}{Total copy number} 
-  \item{b}{Allele B fraction (a.k.a. BAF)} \item{region}{a character value, 
-  annotation label for the region.  Should be encoded as \code{"(C1,C2)"}, 
-  where \code{C1} denotes the minor copy number and \code{C2} denotes the 
-  major copy number.  For example, \describe{ \item{(1,1)}{Normal} 
-  \item{(0,1)}{Hemizygous deletion} \item{(0,0)}{Homozygous deletion} 
-  \item{(1,2)}{Single copy gain} \item{(0,2)}{Copy-neutral LOH} 
+a data.frame containing copy number data for different types of copy
+  number regions.  Columns:\describe{ \item{c}{Total copy number}
+  \item{b}{Allele B fraction (a.k.a. BAF)} \item{region}{a character value,
+  annotation label for the region.  Should be encoded as \code{"(C1,C2)"},
+  where \code{C1} denotes the minor copy number and \code{C2} denotes the
+  major copy number.  For example, \describe{ \item{(1,1)}{Normal}
+  \item{(0,1)}{Hemizygous deletion} \item{(0,0)}{Homozygous deletion}
+  \item{(1,2)}{Single copy gain} \item{(0,2)}{Copy-neutral LOH}
   \item{(2,2)}{Balanced two-copy gain} \item{(1,3)}{Unbalanced two-copy gain}
-  \item{(0,3)}{Single-copy gain with LOH} }} \item{muN}{the (germline) 
-  genotype of SNPs. By definition, rows with missing genotypes are 
+  \item{(0,3)}{Single-copy gain with LOH} }} \item{muN}{the (germline)
+  genotype of SNPs. By definition, rows with missing genotypes are
   interpreted as non-polymorphic loci (a.k.a. copy number probes).}}
 }
 \description{
