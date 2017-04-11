@@ -40,4 +40,3 @@ are included in the 'inst/preprocessing/GSE11976' directory of this package.
 dat <- loadCnRegionData("GSE11976_CRL2324")
 unique(dat$region)
 }
-

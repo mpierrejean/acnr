@@ -54,4 +54,3 @@ Bengtsson H., Neuvial, P. and Speed, T. P. (2010) TumorBoost:
   normalization of allele-specific tumor copy numbers from a single pair of 
   tumor-normal genotyping microarrays. BMC bioinformatics 11 (2010), p. 245.
 }
-

@@ -37,4 +37,3 @@ Neuvial, P., Bengtsson H., and Speed, T. P. (2011) Statistical
   analysis of Single Nucleotide Polymorphism microarrays in cancer studies.
   Chapter 11 in *Handbook of Statistical Bioinformatics*,  Springer.
 }
-

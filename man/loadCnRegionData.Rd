@@ -55,4 +55,3 @@ str(affyDat2)
 \author{
 Morgane Pierre-Jean and Pierre Neuvial
 }
-
