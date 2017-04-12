@@ -19,3 +19,5 @@ Suggests:
     testthat
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
+URL: https://github.com/mpierrejean/acnr
+BugReports: https://github.com/mpierrejean/acnr/issues
