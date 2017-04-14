@@ -1,5 +1,9 @@
 # Package: acnr
 
+## Version: 0.4.0 [2017-04-15]
+
+* Preparing for CRAN submission
+
 ## Version: 0.3.2-9000 [2017-04-11]
 
 * Updated data set GSE29172_H1395 by taking only the first 5000 loci of each
@@ -41,7 +45,7 @@
 ## Version: 0.2.6 [2016-11-23]
 
 * Moved to roxygen2 documentation using package 'Rd2roxygen'
-* Cleaned up DESCRIPTOIN
+* Cleaned up DESCRIPTION
 * Passes R CMD check locally with one NOTE (long file paths)
 
 ## Version: 0.2.5 [2016-05-04]

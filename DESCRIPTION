@@ -1,8 +1,8 @@
 Package: acnr
 Type: Package
 Title: Annotated Copy-Number Regions
-Version: 0.3.2-9000
-Date: 2017-04-11
+Version: 0.4.0
+Date: 2017-04-15
 Authors@R: c(person("Morgane", "Pierre-Jean", role = c("aut", "cre"),
                      email = "morgane.pierrejean@genopole.cnrs.fr"),
               person("Pierre", "Neuvial", role = "aut"))
