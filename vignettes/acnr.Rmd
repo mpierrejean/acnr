@@ -16,18 +16,26 @@ dev='png', fig.width=5, fig.height=5
 )
 ```
 
-This vignette describes the annotated data sets contained in the `acnr` package.
+The `acnr` package is a data package containing SNP array data from different platforms (Affymetrix and Immumina) and different types of copy-number regions. These regions were identified manually by the authors of the package and may be used to generate realistic data sets with known truth.
 
-```{r, include=FALSE}
+This package was initially built to serve as a data package for the `jointseg` package which is currently available from  [github](https://github.com/mpierrejean/jointseg).
+
+
+Currently the `acnr` package contains three data sets curated from GEO:
+
+```{r}
 library("acnr")
+dataSets <- listDataSets()
+dataSets
 ```
+
+This vignette provides basic summary statistics of these data sets. 
+
 
 ## Description of the annotated data sets
 
 ```{r}
 tf <- 1
-dataSets <- listDataSets()
-
 regList <- lapply(dataSets, FUN=function(ds) {
     regDat <- loadCnRegionData(dataSet=ds, tumorFraction=tf) 
     regs <- regDat[["region"]]
@@ -40,10 +48,7 @@ tab <- sapply(allregs, FUN=function(reg) {
 })
 cap <- paste("Size of annotated copy-number regions for each of the", 
             length(dataSets), "data sets.")
-if (require(xtable)) {
-    print(xtable(tab, caption=cap, label="tab:regData",
-                table.placement="!h", caption.placement="bottom"))
-}
+knitr::kable(tab, caption=cap)
 ```
 
 ## Session information
