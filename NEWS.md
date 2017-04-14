@@ -2,6 +2,8 @@
 
 ## Version: 0.3.2-9000 [2017-04-11]
 
+* Updated data set GSE29172_H1395 by taking only the first 5000 loci of each
+  region in order to maintain package size <3Mb.
 * Added inst/CITATION.
 * Minor updates to doc.
 
@@ -55,7 +57,7 @@
 
 ## Version: 0.2.3 [2014-10-27]
 
-* Changed ‘Affymetrix’ data, package is now less than 5MB.
+* Changed 'Affymetrix' data, package is now less than 5MB.
 
 ## Version: 0.2.2 [2014-09-08]
 
@@ -67,11 +69,11 @@
 
 ## Version: 0.2.0 [2014-05-30]
 
-* Changed ‘platform’ to ‘dataSet’.
+* Changed 'platform' to 'dataSet'.
 
 ## Version: 0.1.7 [2014-05-27]
 
-* Changed ‘Illumina’ to ‘GSE11976’ and ‘Affymetrix’ to ‘GSE29172’.
+* Changed 'Illumina' to 'GSE11976' and 'Affymetrix' to 'GSE29172'.
 
 ## Version: 0.1.6 [2014-05-14]
 

@@ -5,7 +5,7 @@ date: "14/12/2016"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Autocorrelation structure of the acnr data sets}
   %\VignetteEncoding{UTF-8}
 ---
   
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-This document aims to test whether DNA copy number profiles built by resampling within the `acnr`package are "realist", i.e. whether they have a similar spatial autocorrelation structure as the original data.
+This document aims to test whether DNA copy number profiles built by resampling within the `acnr`package are "realistic", i.e. whether they have a similar spatial autocorrelation structure as the original data.
 
 ```{r, message=FALSE}
 library("acnr")

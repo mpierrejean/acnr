@@ -44,7 +44,12 @@ for (pct in pcts) {
         datList[[tag]] <- dat
     } 
 }
-dat <- do.call("rbind", datList)
+regSizes <-  sapply(datList, nrow)
+tgtSize <- 5000
+stopifnot(min(regSizes) > tgtSize) ## sanity check
+datListLight <- lapply(datList, head, tgtSize)
+##dat <- do.call("rbind", datList)
+dat <- do.call("rbind", datListLight)
 rownames(dat) <- NULL
 str(dat)
 

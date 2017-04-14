@@ -1,0 +1,28 @@
+citHeader("To cite package 'acnr' in publications, please use the following references:")
+
+year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date, perl = TRUE)
+vers <- paste("R package version", meta$Version)
+
+citEntry(entry="Manual",
+         title = "acnr: Annotated Copy-Number Regions",
+         author = personList(as.person("Morgane Pierre-Jean"),
+                             as.person("Pierre Neuvial")),
+         year = year,
+         note = vers,
+
+         textVersion =
+         paste("Morgane Pierre-Jean and Pierre Neuvial (",
+               year,
+               "). acnr: Annotated Copy-Number Regions.",
+               vers, ".", sep=""))
+
+citEntry(entry="Article",
+         title = "Performance evaluation of {DNA} copy number segmentation methods",
+         author = personList(as.person("Morgane Pierre-Jean"),
+                             as.person("Guillem Rigaill"),
+                             as.person("Pierre Neuvial")),
+         year = "2015",
+	 url = "http://bib.oxfordjournals.org/content/16/4/600.abstract",
+	 journal = "Briefings in Bioinformatics",
+	 textVersion = "Morgane Pierre-Jean, Guillem Rigaill and Pierre  Neuvial. Performance evaluation of DNA copy number segmentation methods.  Briefings in Bioinformatics (2015) 16 (4): 600-615."
+)
