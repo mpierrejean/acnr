@@ -1,4 +1,4 @@
-# acnr 0.4.0 [2017-04-15]
+# acnr 1.0.0 [2017-04-15]
 
 * Updated data set GSE29172_H1395 by taking only the first 5000 loci of each
   region in order to maintain package size <3Mb.

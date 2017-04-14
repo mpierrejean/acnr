@@ -123,11 +123,6 @@ The original data is autocorrelated. This implies that the uniform resampling pe
 
 We note that this autocorrelation is hardly detectable even in regions of 1,000 or 2,000 data points. Given the resolution of the Affymetrix GenomeWide SNP 6.0 chip type (on average, one data point every 1.5kb), this implies that the distribution of total copy numbers in regions smaller than a few megabases does provide a good approximation of the true distribution.
 
-## TODO
-
-* influence of celularity
-* other data sets
-
 ## Session information
 
 ```{r}
