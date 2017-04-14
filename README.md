@@ -12,8 +12,8 @@ This package was initially built to serve as a data package for the [jointseg](h
 
 ## Software status
 
-| Resource:     | GitHub        | Travis CI      | Appveyor         |
+| Resource:     | CRAN        | Travis CI      | Appveyor         |
 | ------------- | ------------------- | -------------- | ---------------- |
 | _Platforms:_  | _Multiple_          | _Linux & OS X_ | _Windows_        |
-| R CMD check  | | <a href="https://travis-ci.org/mpierrejean/acnr"><img src="https://travis-ci.org/mpierrejean/acnr.svg" alt="Build status"></a> | <a href="https://ci.appveyor.com/project/mpierrejean/acnr"><img src="https://ci.appveyor.com/api/projects/status/github/mpierrejean/acnr?svg=true" alt="Build status"></a> |
+| R CMD check   | <a href="https://cran.r-project.org/web/checks/check_results_acnr.html"><img border="0" src="http://www.r-pkg.org/badges/version/acnr" alt="CRAN version"></a> || <a href="https://travis-ci.org/mpierrejean/acnr"><img src="https://travis-ci.org/mpierrejean/acnr.svg" alt="Build status"></a> | <a href="https://ci.appveyor.com/project/mpierrejean/acnr"><img src="https://ci.appveyor.com/api/projects/status/github/mpierrejean/acnr?svg=true" alt="Build status"></a> |
 | Test coverage | | <a href="https://codecov.io/gh/mpierrejean/acnr"><img src="https://codecov.io/gh/mpierrejean/acnr/branch/master/graph/badge.svg" alt="Coverage Status"/></a> | |
