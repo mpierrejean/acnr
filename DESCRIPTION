@@ -6,9 +6,9 @@ Date: 2017-04-15
 Authors@R: c(person("Morgane", "Pierre-Jean", role = c("aut", "cre"),
                      email = "morgane.pierrejean@genopole.cnrs.fr"),
               person("Pierre", "Neuvial", role = "aut"))
-Description: This data package contains SNP array data from different types of
-    copy-number regions. These regions were identified manually by the authors 
-    of the package and may be used to generate realistic data sets with known 
+Description: This data package provides SNP array data from different types of
+    copy-number regions. These regions were identified manually by the authors
+    of the package and may be used to generate realistic data sets with known
     truth.
 License: LGPL (>= 2.1)
 Depends:
@@ -18,7 +18,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 URL: https://github.com/mpierrejean/acnr
 BugReports: https://github.com/mpierrejean/acnr/issues
