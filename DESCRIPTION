@@ -6,7 +6,7 @@ Date: 2017-04-15
 Authors@R: c(person("Morgane", "Pierre-Jean", role = c("aut", "cre"),
                      email = "morgane.pierrejean@genopole.cnrs.fr"),
               person("Pierre", "Neuvial", role = "aut"))
-Description: This data package provides SNP array data from different types of
+Description: Provides SNP array data from different types of
     copy-number regions. These regions were identified manually by the authors
     of the package and may be used to generate realistic data sets with known
     truth.
