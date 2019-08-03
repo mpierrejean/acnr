@@ -14,7 +14,7 @@ citEntry(entry="Manual",
          paste("Morgane Pierre-Jean and Pierre Neuvial (",
                year,
                "). acnr: Annotated Copy-Number Regions.",
-               vers, ".", sep=""))
+               vers, ". https://CRAN.R-project.org/package=acnr.", sep=""))
 
 citEntry(entry="Article",
          title = "Performance evaluation of {DNA} copy number segmentation methods",
